@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../App'
 
 const RegisterationPage = () => {
 	const navigate = useNavigate()
+	const { login } = useAuth()
 	const [showPassword, setShowPassword] = useState(false)
 	const [formData, setFormData] = useState({
 		firstName: '',
@@ -44,7 +46,7 @@ const RegisterationPage = () => {
 		}
 
 		try {
-			localStorage.setItem('user', JSON.stringify(userData))
+			login(userData)
 			alert('Account created! Welcome aboard 🎉')
 			navigate('/')
 		} catch (err) {

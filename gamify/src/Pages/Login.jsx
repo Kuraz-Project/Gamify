@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../App'
 
 const Login = () => {
 	const navigate = useNavigate()
+	const { login } = useAuth()
 	const [showPassword, setShowPassword] = useState(false)
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
@@ -31,7 +33,7 @@ const Login = () => {
 		}
 
 		try {
-			localStorage.setItem('user', JSON.stringify(user))
+			login(user)
 			if (rememberMe) {
 				localStorage.setItem('rememberEmail', email)
 			} else {
