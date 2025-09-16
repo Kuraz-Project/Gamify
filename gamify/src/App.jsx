@@ -6,6 +6,8 @@ import Explore from './Pages/Explore'
 import Leader from './Pages/Leader'
 import Create from './Pages/Create'
 import Error from './Pages/Error'
+import RegisterationPage from './Pages/Register'
+import Login from './Pages/Login'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -14,6 +16,8 @@ const router = createBrowserRouter(
       <Route path='explore' element={<Explore />}/>
       <Route path='leader' element={<Leader />}/>
       <Route path='create' element={<Create />}/>
+      <Route path='register' element={<RegisterationPage />}/>
+      <Route path='login' element={<Login />}/>
       <Route path="*" element={<Error />}/>
     </Route>
   )
