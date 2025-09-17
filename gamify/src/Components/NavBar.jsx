@@ -1,8 +1,13 @@
 import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const NavBar = () => {
   const location = useLocation()
+  const navigate = useNavigate()
+
+  const handleClick = () => {
+    navigate("/profile")
+  }
 
   const isActiveLink = (path) => {
     return location.pathname === path
@@ -68,7 +73,7 @@ const NavBar = () => {
 
         {/* User Actions */}
         <div className='flex justify-between items-center gap-4'>
-            <div className='w-12 h-12 rounded-full bg-gray-200 flex justify-center items-center font-semibold text-gray-600'>
+            <div className='w-12 h-12 rounded-full bg-gray-200 flex justify-center items-center font-semibold text-gray-600 hover:cursor-pointer' onClick={handleClick}>
                 P
             </div>
             <Link 
