@@ -11,6 +11,7 @@ import Login from './Pages/Login'
 import Profile from './Pages/Profile'
 import Wallet from './Pages/Wallet'
 import Leaderboards from './Pages/Leaderboards'
+import LiveSession from './Pages/LiveSessions'
 
 const AuthContext = createContext(null)
 
@@ -57,6 +58,7 @@ const router = createBrowserRouter(
       <Route path='leader' element={<Leaderboards />}/>
       <Route path='leaderboards' element={<Leaderboards />}/>
       <Route path='profile' element={<Profile />}/>
+      <Route path='livesessions' element={<LiveSession />}/>
       <Route path='wallet' element={<Wallet />}/>
       <Route path='create' element={<Create />}/>
       <Route path='register' element={<RegisterationPage />}/>
