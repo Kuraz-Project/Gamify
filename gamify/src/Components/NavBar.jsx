@@ -1,10 +1,21 @@
 import React from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+<<<<<<< HEAD
 import { Home, Compass, Crown, User, Users } from "lucide-react"
 
 const NavBar = () => {
     const location = useLocation()
     const navigate  = useNavigate()
+=======
+
+const NavBar = () => {
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  const handleClick = () => {
+    navigate("/profile")
+  }
+>>>>>>> 23b805d425cf67a9fdc950c4aa629e3a57cb91db
 
     const toHome = () => {
         navigate("")
@@ -75,6 +86,13 @@ const NavBar = () => {
                     </li>
                 </ul>
 
+<<<<<<< HEAD
+=======
+        {/* User Actions */}
+        <div className='flex justify-between items-center gap-4'>
+            <div className='w-12 h-12 rounded-full bg-gray-200 flex justify-center items-center font-semibold text-gray-600 hover:cursor-pointer' onClick={handleClick}>
+                P
+>>>>>>> 23b805d425cf67a9fdc950c4aa629e3a57cb91db
             </div>
 
             {/* User Actions */}

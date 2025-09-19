@@ -11,7 +11,11 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.13",
+<<<<<<< HEAD
     "lucide-react": "^0.544.0",
+=======
+    "json-server": "^1.0.0-beta.3",
+>>>>>>> 23b805d425cf67a9fdc950c4aa629e3a57cb91db
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-icons": "^5.5.0",
