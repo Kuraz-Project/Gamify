@@ -261,4 +261,201 @@
       "creations": [{ "id": 20, "title": "Intro to Deep Learning", "type": "video" }]
     }
   ]
+},
+"leaderboards": {
+  "topLearners": [
+    {
+      "id": 1,
+      "rank": 1,
+      "name": "Emma Thompson",
+      "avatar": "https://images.unsplash.com/photo-1494790108755-2616b332e234?w=100&h=100&fit=crop&crop=face",
+      "points": 15420,
+      "level": "Master",
+      "badges": ["Top Learner", "Question Master", "Knowledge Seeker"],
+      "sessionsAttended": 89,
+      "questionsAsked": 234,
+      "change": "+12%"
+    },
+    {
+      "id": 2,
+      "rank": 2,
+      "name": "David Johnson",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+      "points": 14890,
+      "level": "Expert",
+      "badges": ["Early Adopter", "Consistent Learner", "Community Helper"],
+      "sessionsAttended": 76,
+      "questionsAsked": 198,
+      "change": "+8%"
+    },
+    {
+      "id": 3,
+      "rank": 3,
+      "name": "Sofia Rodriguez",
+      "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
+      "points": 13650,
+      "level": "Expert",
+      "badges": ["Tech Enthusiast", "Session Regular", "Mentor"],
+      "sessionsAttended": 65,
+      "questionsAsked": 167,
+      "change": "+15%"
+    }
+  ],
+  "topCreators": [
+    {
+      "id": 1,
+      "rank": 1,
+      "name": "Dr. Sarah Chen",
+      "avatar": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&h=100&fit=crop&crop=face",
+      "rating": 4.9,
+      "totalSessions": 45,
+      "totalStudents": 2340,
+      "specialty": "AI & Healthcare",
+      "earnings": "$12,450",
+      "badges": ["Top Rated", "Expert", "Research Leader"],
+      "change": "+18%"
+    },
+    {
+      "id": 2,
+      "rank": 2,
+      "name": "Michael Torres",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
+      "rating": 4.8,
+      "totalSessions": 32,
+      "totalStudents": 1890,
+      "specialty": "Startup Strategy",
+      "earnings": "$9,870",
+      "badges": ["Entrepreneur", "Mentor", "Growth Expert"],
+      "change": "+12%"
+    }
+  ],
+  "achievements": [
+    {
+      "name": "First Session",
+      "description": "Attend your first Q&A session",
+      "icon": "FaBullseye",
+      "rarity": "Common",
+      "earned": 1890
+    },
+    {
+      "name": "Question Master",
+      "description": "Ask 100 meaningful questions",
+      "icon": "FaCommentDots",
+      "rarity": "Rare",
+      "earned": 234
+    },
+    {
+      "name": "Top Contributor",
+      "description": "Be in top 10% this month",
+      "icon": "FaCrown",
+      "rarity": "Epic",
+      "earned": 89
+    },
+    {
+      "name": "Knowledge Seeker",
+      "description": "Complete 50 sessions",
+      "icon": "FaTrophy",
+      "rarity": "Legendary",
+      "earned": 45
+    }
+  ]
+},
+"liveSessions": {
+  "sessionData": {
+    "id": 1,
+    "title": "AI in Healthcare: Future Trends and Applications",
+    "creator": {
+      "name": "Dr. Sarah Chen",
+      "avatar": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&h=100&fit=crop&crop=face",
+      "title": "AI Healthcare Specialist",
+      "rating": 4.9,
+      "followers": 12500
+    },
+    "isLive": true,
+    "viewers": 1247,
+    "duration": "45:32",
+    "category": "Technology",
+    "description": "Join Dr. Sarah Chen as she explores the latest AI applications in healthcare, discusses breakthrough technologies, and answers your questions about the future of medical AI.",
+    "startTime": "2:00 PM EST",
+    "tags": ["AI", "Healthcare", "Technology", "Innovation", "Medical"]
+  },
+  "chatMessages": [
+    {
+      "id": 1,
+      "user": "Alex Johnson",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face",
+      "message": "This is fascinating! Can you explain more about AI-powered diagnostics?",
+      "timestamp": "2:15 PM",
+      "isQuestion": true,
+      "likes": 12,
+      "isModerator": false
+    },
+    {
+      "id": 2,
+      "user": "Maria Garcia",
+      "avatar": "https://images.unsplash.com/photo-1494790108755-2616b332e234?w=40&h=40&fit=crop&crop=face",
+      "message": "Great session! The examples are very clear.",
+      "timestamp": "2:16 PM",
+      "isQuestion": false,
+      "likes": 8,
+      "isModerator": false
+    },
+    {
+      "id": 3,
+      "user": "Dr. Sarah Chen",
+      "avatar": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=40&h=40&fit=crop&crop=face",
+      "message": "@Alex Johnson Great question! AI diagnostics can analyze medical images 10x faster than traditional methods...",
+      "timestamp": "2:17 PM",
+      "isQuestion": false,
+      "likes": 25,
+      "isModerator": true
+    },
+    {
+      "id": 4,
+      "user": "David Kim",
+      "avatar": "https://images.unsplash.com/photo-1556157382-97eda2d62296?w=40&h=40&fit=crop&crop=face",
+      "message": "What about privacy concerns with patient data in AI systems?",
+      "timestamp": "2:18 PM",
+      "isQuestion": true,
+      "likes": 15,
+      "isModerator": false
+    },
+    {
+      "id": 5,
+      "user": "Lisa Park",
+      "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face",
+      "message": "Thank you for explaining that! Very helpful 👍",
+      "timestamp": "2:19 PM",
+      "isQuestion": false,
+      "likes": 5,
+      "isModerator": false
+    }
+  ],
+  "questionQueue": [
+    {
+      "id": 1,
+      "user": "Alex Johnson",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face",
+      "question": "How do you see AI changing surgical procedures in the next 5 years?",
+      "votes": 23,
+      "timestamp": "2:20 PM"
+    },
+    {
+      "id": 2,
+      "user": "Emma Wilson",
+      "avatar": "https://images.unsplash.com/photo-1494790108755-2616b332e234?w=40&h=40&fit=crop&crop=face",
+      "question": "What are the main challenges in implementing AI in rural healthcare?",
+      "votes": 18,
+      "timestamp": "2:21 PM"
+    },
+    {
+      "id": 3,
+      "user": "Michael Torres",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face",
+      "question": "Can you share examples of successful AI healthcare startups?",
+      "votes": 15,
+      "timestamp": "2:22 PM"
+    }
+  ]
+}
 }

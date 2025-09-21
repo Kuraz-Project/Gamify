@@ -16,8 +16,14 @@ const Login = () => {
 		let user = null
 		try {
 			const stored = localStorage.getItem('user')
-			if (stored) user = JSON.parse(stored)
-		} catch {}
+			if (stored && stored !== 'null' && stored !== 'undefined') {
+				user = JSON.parse(stored)
+			}
+		} catch (err) {
+			console.error('Error parsing user from localStorage:', err)
+			// Optionally clear invalid data
+			localStorage.removeItem('user')
+		}
 
 		if (!user) {
 			user = {
