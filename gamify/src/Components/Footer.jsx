@@ -1,12 +1,12 @@
 import React from "react";
 import { Twitter, Linkedin, Github } from "lucide-react";
 
-export default function Footer() {
+const Footer = () => {
   return (
     <footer className="bg-slate-900 text-white mt-16 relative">
-      <div className="container relative z-10 py-12">
+      <div className="container relative z-10 py-12 pl-4 sm:pl-6 lg:pl-8">
         {/* Top Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 mb-10">
           {/* Logo + About */}
           <div className="lg:col-span-2 space-y-6">
             <div className="flex items-center gap-3">
@@ -72,7 +72,7 @@ export default function Footer() {
         </div>
 
         {/* Newsletter Signup */}
-        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8">
+        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex-1">
               <h3 className="text-2xl font-semibold mb-2">Stay in the loop</h3>
@@ -90,7 +90,10 @@ export default function Footer() {
             </form>
           </div>
         </div>
+
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

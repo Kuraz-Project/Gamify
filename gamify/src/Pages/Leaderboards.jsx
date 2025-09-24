@@ -1,169 +1,557 @@
-import React, { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
-import { Badge } from './ui/badge'
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
-import { Label, Progress } from './ui/other'
-import { FaTrophy, FaMedal, FaCrown, FaChartLine, FaStar, FaAward, FaUsers, FaCommentDots, FaCalendarAlt, FaBullseye } from 'react-icons/fa'
-import { useAuth } from '../App'
+import React, { useState, useEffect, useMemo } from 'react';
+import { useAuth } from '../App';
+import { FaTrophy, FaMedal, FaCrown, FaChartLine, FaStar, FaAward, FaBullseye, FaSearch } from 'react-icons/fa';
+import { Tooltip } from 'react-tooltip';
+import PropTypes from 'prop-types';
 
-const topLearners = [
-  { id: 1, rank: 1, name: 'Emma Thompson', avatar: 'https://images.unsplash.com/photo-1494790108755-2616b332e234?w=100&h=100&fit=crop&crop=face', points: 15420, level: 'Master', badges: ['Top Learner', 'Question Master', 'Knowledge Seeker'], sessionsAttended: 89, questionsAsked: 234, change: '+12%' },
-  { id: 2, rank: 2, name: 'David Johnson', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face', points: 14890, level: 'Expert', badges: ['Early Adopter', 'Consistent Learner', 'Community Helper'], sessionsAttended: 76, questionsAsked: 198, change: '+8%' },
-  { id: 3, rank: 3, name: 'Sofia Rodriguez', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face', points: 13650, level: 'Expert', badges: ['Tech Enthusiast', 'Session Regular', 'Mentor'], sessionsAttended: 65, questionsAsked: 167, change: '+15%' },
-]
+// Constants
+const TIME_PERIODS = ['weekly', 'monthly', 'quarterly', 'alltime'];
+const RARITY_COLORS = {
+  Legendary: 'text-yellow-600 bg-yellow-500',
+  Epic: 'text-purple-600 bg-purple-500',
+  Rare: 'text-blue-600 bg-blue-500',
+  Common: 'text-gray-600 bg-gray-500',
+};
+const ITEMS_PER_PAGE = 5;
 
-const topCreators = [
-  { id: 1, rank: 1, name: 'Dr. Sarah Chen', avatar: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&h=100&fit=crop&crop=face', rating: 4.9, totalSessions: 45, totalStudents: 2340, specialty: 'AI & Healthcare', earnings: '$12,450', badges: ['Top Rated', 'Expert', 'Research Leader'], change: '+18%' },
-  { id: 2, rank: 2, name: 'Michael Torres', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face', rating: 4.8, totalSessions: 32, totalStudents: 1890, specialty: 'Startup Strategy', earnings: '$9,870', badges: ['Entrepreneur', 'Mentor', 'Growth Expert'], change: '+12%' },
-]
+// Rank icon helper
+const rankIcon = (rank) => {
+  if (rank === 1) return <FaCrown className="text-yellow-500 text-3xl" />;
+  if (rank === 2) return <FaMedal className="text-gray-400 text-3xl" />;
+  if (rank === 3) return <FaMedal className="text-amber-600 text-3xl" />;
+  return <span className="text-lg font-bold text-gray-500">#{rank}</span>;
+};
 
-const achievements = [
-  { name: 'First Session', description: 'Attend your first Q&A session', icon: FaBullseye, rarity: 'Common', earned: 1890 },
-  { name: 'Question Master', description: 'Ask 100 meaningful questions', icon: FaCommentDots, rarity: 'Rare', earned: 234 },
-  { name: 'Top Contributor', description: 'Be in top 10% this month', icon: FaCrown, rarity: 'Epic', earned: 89 },
-  { name: 'Knowledge Seeker', description: 'Complete 50 sessions', icon: FaTrophy, rarity: 'Legendary', earned: 45 },
-]
+// Sub-components
+const UserCard = ({ user, type, index }) => (
+  <div
+    className="flex items-center gap-6 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition"
+    data-tooltip-id={`tooltip-${type}-${user.id}`}
+  >
+    <div className="flex items-center justify-center w-14 h-14">{rankIcon(user.rank)}</div>
+    <img
+      src={user.avatar}
+      alt={user.name}
+      className="w-14 h-14 rounded-full object-cover"
+      loading="lazy"
+      onError={(e) => (e.target.src = `https://ui-avatars.com/api/?name=${user.name[0]}`)}
+    />
+    <div className="flex-1 space-y-2">
+      <div className="flex items-center gap-3">
+        <h4 className="font-semibold text-lg">{user.name}</h4>
+        {type === 'learner' ? (
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
+            {user.level}
+          </span>
+        ) : (
+          <div className="flex items-center gap-1">
+            <FaStar className="text-yellow-400" />
+            <span className="text-sm font-medium">{user.rating}</span>
+          </div>
+        )}
+        <span className="text-sm text-green-600 flex items-center gap-1">
+          <FaChartLine /> {user.change}
+        </span>
+      </div>
+      {type === 'creator' && <p className="text-sm text-gray-600">{user.specialty}</p>}
+      <div className="flex flex-wrap gap-2">
+        {user.badges.slice(0, 2).map((b) => (
+          <span
+            key={b}
+            className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-200 text-gray-800 cursor-pointer"
+            data-tooltip-id={`badge-${user.id}-${b}`}
+          >
+            {b}
+            <Tooltip id={`badge-${user.id}-${b}`} content={b} place="top" />
+          </span>
+        ))}
+      </div>
+      <div className="flex gap-6 text-sm text-gray-600">
+        {type === 'learner' ? (
+          <>
+            <span>{user.sessionsAttended} sessions</span>
+            <span>{user.questionsAsked} questions</span>
+          </>
+        ) : (
+          <>
+            <span>{user.totalSessions} sessions</span>
+            <span>{user.totalStudents} students</span>
+          </>
+        )}
+      </div>
+    </div>
+    <div className="text-right">
+      <div className="text-xl font-bold">{type === 'learner' ? user.points.toLocaleString() : user.earnings}</div>
+      <div className="text-sm text-gray-600">{type === 'learner' ? 'points' : 'earned'}</div>
+    </div>
+    <Tooltip id={`tooltip-${type}-${user.id}`} content={`${user.name}'s Profile`} place="top" />
+  </div>
+);
 
-const rankIcon = (rank) => rank === 1 ? <FaCrown className="text-yellow-500" /> : rank === 2 ? <FaMedal className="text-gray-400" /> : rank === 3 ? <FaTrophy className="text-amber-600" /> : <span className="text-lg font-bold text-gray-500">#{rank}</span>
+const AchievementCard = ({ achievement }) => (
+  <div
+    className="flex items-center gap-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition"
+    data-tooltip-id={`achievement-${achievement.id}`}
+  >
+    <div className={`w-14 h-14 rounded-full flex items-center justify-center ${RARITY_COLORS[achievement.rarity].split(' ')[1]}`}>
+      <achievement.icon className="text-white text-xl" />
+    </div>
+    <div className="flex-1 space-y-1">
+      <div className="flex items-center gap-2">
+        <h4 className="font-semibold text-lg">{achievement.name}</h4>
+        <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${RARITY_COLORS[achievement.rarity]} bg-gray-200`}>
+          {achievement.rarity}
+        </span>
+      </div>
+      <p className="text-sm text-gray-600">{achievement.description}</p>
+      <p className="text-xs text-gray-600">{achievement.earnedBy} users earned</p>
+    </div>
+    <Tooltip id={`achievement-${achievement.id}`} content={achievement.description} place="top" />
+  </div>
+);
 
-const rarityColor = (rarity) => rarity === 'Legendary' ? 'text-yellow-600' : rarity === 'Epic' ? 'text-purple-600' : rarity === 'Rare' ? 'text-blue-600' : 'text-gray-600'
+const Pagination = ({ currentPage, totalPages, onPageChange }) => (
+  <div className="flex justify-center gap-2 mt-6">
+    <button
+      onClick={() => onPageChange(currentPage - 1)}
+      disabled={currentPage === 1}
+      className="px-3 py-1 bg-gray-200 rounded-md disabled:opacity-50 hover:bg-gray-300"
+      aria-label="Previous page"
+    >
+      Prev
+    </button>
+    {[...Array(totalPages)].map((_, i) => (
+      <button
+        key={i}
+        onClick={() => onPageChange(i + 1)}
+        className={`px-3 py-1 rounded-md ${currentPage === i + 1 ? 'bg-blue-600 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
+        aria-current={currentPage === i + 1 ? 'page' : undefined}
+      >
+        {i + 1}
+      </button>
+    ))}
+    <button
+      onClick={() => onPageChange(currentPage + 1)}
+      disabled={currentPage === totalPages}
+      className="px-3 py-1 bg-gray-200 rounded-md disabled:opacity-50 hover:bg-gray-300"
+      aria-label="Next page"
+    >
+      Next
+    </button>
+  </div>
+);
 
 const Leaderboards = () => {
-  const { user } = useAuth()
-  const [timePeriod, setTimePeriod] = useState('weekly')
+  const { user } = useAuth();
+  const [timePeriod, setTimePeriod] = useState('weekly');
+  const [topLearners, setTopLearners] = useState([]);
+  const [topCreators, setTopCreators] = useState([]);
+  const [achievements, setAchievements] = useState([]);
+  const [learnerRank, setLearnerRank] = useState(null);
+  const [creatorRank, setCreatorRank] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [activeTab, setActiveTab] = useState('learners');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [learnerPage, setLearnerPage] = useState(1);
+  const [creatorPage, setCreatorPage] = useState(1);
+
+  useEffect(() => {
+    const fetchData = async (retryCount = 0) => {
+      setLoading(true);
+      try {
+        const [usersRes, leaderRes] = await Promise.all([
+          fetch('http://localhost:3000/users'),
+          fetch('http://localhost:3000/leaderboards'),
+        ]);
+
+        if (!usersRes.ok || !leaderRes.ok) {
+          throw new Error(usersRes.ok ? 'Leaderboard fetch failed' : 'Users fetch failed');
+        }
+
+        const users = await usersRes.json();
+        const leader = await leaderRes.json();
+
+        // Process users for learners and creators
+        const sortedLearners = [...users]
+          .sort((a, b) => b.achievements.points - a.achievements.points)
+          .map((u, i) => ({
+            id: u.id,
+            rank: i + 1,
+            name: u.username,
+            avatar: u.profile.avatar,
+            level: u.achievements.level,
+            badges: u.achievements.badges,
+            points: u.achievements.points,
+            sessionsAttended: u.content.schedule.length,
+            questionsAsked: u.performance.ratings.length,
+            change: `+${Math.floor(Math.random() * 20)}%`,
+          }));
+
+        const sortedCreators = [...users]
+          .filter(u => u.content.creations.length > 0)
+          .sort((a, b) => b.performance.averageRating - a.performance.averageRating)
+          .map((u, i) => ({
+            id: u.id,
+            rank: i + 1,
+            name: u.username,
+            avatar: u.profile.avatar,
+            rating: u.performance.averageRating,
+            totalSessions: u.content.schedule.length + u.content.creations.length,
+            totalStudents: u.social.totalFollowers,
+            specialty: u.content.creations[0]?.tags[1] || 'General',
+            earnings: `$${Math.floor(u.performance.averageRating * 2000).toLocaleString()}`,
+            badges: u.achievements.badges,
+            change: `+${Math.floor(Math.random() * 15)}%`,
+          }));
+
+        setTopLearners(sortedLearners);
+        setTopCreators(sortedCreators);
+        setAchievements(leader.achievements.available.map(a => ({
+          ...a,
+          icon: a.icon === 'trophy' ? FaTrophy : FaAward,
+        })));
+
+        if (user && user.id) {
+          setLearnerRank(sortedLearners.findIndex(u => u.id === user.id) + 1 || 'Unranked');
+          setCreatorRank(sortedCreators.findIndex(u => u.id === user.id) + 1 || 'Unranked');
+        }
+
+        setLoading(false);
+      } catch (err) {
+        console.error('Error fetching data:', err);
+        if (retryCount < 3) {
+          setTimeout(() => fetchData(retryCount + 1), 1000 * Math.pow(2, retryCount));
+        } else {
+          setError('Unable to load leaderboard data after multiple attempts.');
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchData();
+  }, [user]);
+
+  // Memoized filtered data
+  const filteredLearners = useMemo(() => {
+    return topLearners.filter(l => l.name.toLowerCase().includes(searchQuery.toLowerCase()));
+  }, [topLearners, searchQuery]);
+
+  const filteredCreators = useMemo(() => {
+    return topCreators.filter(c => c.name.toLowerCase().includes(searchQuery.toLowerCase()));
+  }, [topCreators, searchQuery]);
+
+  // Pagination logic
+  const learnerTotalPages = Math.ceil(filteredLearners.length / ITEMS_PER_PAGE);
+  const creatorTotalPages = Math.ceil(filteredCreators.length / ITEMS_PER_PAGE);
+  const paginatedLearners = filteredLearners.slice((learnerPage - 1) * ITEMS_PER_PAGE, learnerPage * ITEMS_PER_PAGE);
+  const paginatedCreators = filteredCreators.slice((creatorPage - 1) * ITEMS_PER_PAGE, creatorPage * ITEMS_PER_PAGE);
+
+  if (loading) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-12 space-y-8">
+        <div className="space-y-4">
+          <div className="h-10 w-48 bg-gray-200 rounded animate-pulse" />
+          <div className="h-4 w-64 bg-gray-200 rounded animate-pulse" />
+        </div>
+        <div className="space-y-6">
+          <div className="border bg-white rounded-lg shadow-sm p-8">
+            <div className="h-6 w-32 bg-gray-200 rounded mb-4 animate-pulse" />
+            {[...Array(5)].map((_, j) => (
+              <div key={j} className="flex items-center justify-between py-3 border-b last:border-b-0">
+                <div className="flex items-center gap-4">
+                  <div className="h-14 w-14 rounded-full bg-gray-200 animate-pulse" />
+                  <div>
+                    <div className="h-4 w-24 bg-gray-200 rounded mb-2 animate-pulse" />
+                    <div className="h-3 w-16 bg-gray-200 rounded animate-pulse" />
+                  </div>
+                </div>
+                <div className="h-4 w-20 bg-gray-200 rounded animate-pulse" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-12 text-center">
+        <h1 className="text-2xl font-semibold text-gray-800">{error}</h1>
+        <button
+          onClick={() => window.location.reload()}
+          className="mt-4 inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
+          aria-label="Retry loading leaderboards"
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
 
   return (
-    <div className="container py-8 space-y-8">
+    <div className="max-w-7xl mx-auto px-4 py-12 space-y-10">
+      {/* Header */}
       <div className="space-y-4">
-        <h1 className="text-3xl font-bold">Leaderboards</h1>
-        <p className="text-gray-600">See how you rank among the community and discover top performers</p>
+        <h1 className="text-4xl font-bold tracking-tight">Leaderboards</h1>
+        <p className="text-lg text-gray-600">Discover top performers and track your progress within the community</p>
       </div>
 
+      {/* User Ranking */}
       {user && (
-        <Card className="border-blue-200">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <Avatar className="w-16 h-16 border-2 border-blue-200"><AvatarImage src={user.avatar} /><AvatarFallback>{user.name.charAt(0)}</AvatarFallback></Avatar>
-                <div>
-                  <h3 className="font-semibold text-lg">Your Current Rank</h3>
-                  <p className="text-gray-600">#{23} • {user.points} points • {user.level}</p>
-                  <div className="flex items-center gap-2 mt-2"><Badge variant="secondary">{user.badges?.[0]}</Badge><span className="text-sm text-green-600 flex items-center gap-1"><FaChartLine /> +15% this week</span></div>
+        <div className="border bg-white rounded-lg shadow-sm p-8">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="flex items-center gap-6">
+              <img
+                src={user.avatar}
+                alt={user.name}
+                className="w-20 h-20 rounded-full border-2 object-cover"
+                loading="lazy"
+                onError={(e) => (e.target.src = `https://ui-avatars.com/api/?name=${user.name?.[0] || ''}`)}
+              />
+              <div className="space-y-2">
+                <h3 className="text-xl font-semibold">Your Current Rank</h3>
+                <p className="text-gray-600">
+                  Learner: #{learnerRank} • Creator: #{creatorRank} • {user.points?.toLocaleString() || 0} points • {user.level || 'Beginner'}
+                </p>
+                <div className="flex items-center gap-3">
+                  {user.badges?.[0] && (
+                    <span
+                      className="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-gray-100 text-gray-800 cursor-pointer"
+                      data-tooltip-id={`user-badge-${user.id}`}
+                    >
+                      {user.badges[0]}
+                      <Tooltip id={`user-badge-${user.id}`} content={user.badges[0]} place="top" />
+                    </span>
+                  )}
+                  <span className="text-sm text-green-600 flex items-center gap-1">
+                    <FaChartLine /> +15% this week
+                  </span>
                 </div>
               </div>
-              <div className="text-right">
-                <div className="text-sm text-gray-600 mb-2">Next rank in</div>
-                <div className="w-32"><Progress value={75} className="h-2" /><div className="text-xs text-gray-600 mt-1">750/1000 points</div></div>
-              </div>
             </div>
-          </CardContent>
-        </Card>
+            <div className="w-full md:w-48">
+              <div className="text-sm text-gray-600 mb-2">Progress to Next Rank</div>
+              <div className="w-full bg-gray-200 rounded-full h-4">
+                <div className="bg-blue-600 h-4 rounded-full" style={{ width: '75%' }}></div>
+              </div>
+              <div className="text-sm text-gray-600 mt-2">750/1000 points</div>
+            </div>
+          </div>
+        </div>
       )}
 
-      <div className="flex justify-between items-center">
-        <div>
-          <h2 className="text-2xl font-semibold">Rankings</h2>
-          <p className="text-gray-600">Top performers in the community</p>
+      {/* Rankings Header */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div className="space-y-2">
+          <h2 className="text-3xl font-semibold">Rankings</h2>
+          <p className="text-gray-600">Explore the top performers in our community</p>
         </div>
-        <Select>
-          <SelectTrigger className="w-[140px]"><SelectValue placeholder={timePeriod} /></SelectTrigger>
-          <SelectContent>
-            {['weekly','monthly','quarterly','alltime'].map(v => <SelectItem key={v} value={v} onClick={() => setTimePeriod(v)}>{v === 'alltime' ? 'All Time' : `This ${v.charAt(0).toUpperCase()+v.slice(1)}`}</SelectItem>)}
-          </SelectContent>
-        </Select>
+        <div className="flex gap-4">
+          <div className="relative">
+            <FaSearch className="absolute left-3 top-3 text-gray-400" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search users..."
+              className="pl-10 pr-4 py-2 border-gray-300 rounded-md focus:ring-2 focus:ring-blue-600"
+              aria-label="Search users by username"
+            />
+          </div>
+          <select
+            value={timePeriod}
+            onChange={(e) => setTimePeriod(e.target.value)}
+            className="w-[180px] border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-600"
+            aria-label="Select time period for rankings"
+          >
+            {TIME_PERIODS.map((v) => (
+              <option key={v} value={v}>
+                {v === 'alltime' ? 'All Time' : `This ${v.charAt(0).toUpperCase() + v.slice(1)}`}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
-      <Tabs defaultValue="learners" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="learners">Top Learners</TabsTrigger>
-          <TabsTrigger value="creators">Top Creators</TabsTrigger>
-          <TabsTrigger value="achievements">Achievements</TabsTrigger>
-        </TabsList>
+      {/* Tabs */}
+      <div className="space-y-8">
+        <div className="grid grid-cols-3 gap-2 bg-gray-100 p-1 rounded-lg" role="tablist" aria-label="Leaderboard tabs">
+          <button
+            onClick={() => setActiveTab('learners')}
+            className={`text-lg py-3 rounded-md font-medium ${activeTab === 'learners' ? 'bg-white text-gray-800 shadow-sm' : 'text-gray-600 hover:bg-gray-200'}`}
+            role="tab"
+            aria-selected={activeTab === 'learners'}
+            aria-controls="learners-panel"
+            id="learners-tab"
+          >
+            Top Learners
+          </button>
+          <button
+            onClick={() => setActiveTab('creators')}
+            className={`text-lg py-3 rounded-md font-medium ${activeTab === 'creators' ? 'bg-white text-gray-800 shadow-sm' : 'text-gray-600 hover:bg-gray-200'}`}
+            role="tab"
+            aria-selected={activeTab === 'creators'}
+            aria-controls="creators-panel"
+            id="creators-tab"
+          >
+            Top Creators
+          </button>
+          <button
+            onClick={() => setActiveTab('achievements')}
+            className={`text-lg py-3 rounded-md font-medium ${activeTab === 'achievements' ? 'bg-white text-gray-800 shadow-sm' : 'text-gray-600 hover:bg-gray-200'}`}
+            role="tab"
+            aria-selected={activeTab === 'achievements'}
+            aria-controls="achievements-panel"
+            id="achievements-tab"
+          >
+            Achievements
+          </button>
+        </div>
 
-        <TabsContent value="learners" className="space-y-6">
-          <Card>
-            <CardHeader><CardTitle className="flex items-center gap-2"><FaTrophy className="text-yellow-500" /> Top Learners</CardTitle></CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {topLearners.map((learner) => (
-                  <div key={learner.id} className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
-                    <div className="flex items-center justify-center w-12 h-12">{rankIcon(learner.rank)}</div>
-                    <Avatar className="w-12 h-12"><AvatarImage src={learner.avatar} /><AvatarFallback>{learner.name.charAt(0)}</AvatarFallback></Avatar>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1"><h4 className="font-semibold">{learner.name}</h4><Badge variant="secondary">{learner.level}</Badge><span className="text-sm text-green-600 flex items-center gap-1"><FaChartLine /> {learner.change}</span></div>
-                      <div className="flex flex-wrap gap-1 mb-2">{learner.badges.slice(0, 2).map((b) => (<Badge key={b} variant="outline" className="text-xs">{b}</Badge>))}</div>
-                      <div className="flex gap-4 text-sm text-gray-600"><span>{learner.sessionsAttended} sessions</span><span>{learner.questionsAsked} questions</span></div>
-                    </div>
-                    <div className="text-right"><div className="text-lg font-bold">{learner.points.toLocaleString()}</div><div className="text-sm text-gray-600">points</div></div>
+        {/* Learners Tab */}
+        {activeTab === 'learners' && (
+          <div id="learners-panel" role="tabpanel" aria-labelledby="learners-tab">
+            <div className="border bg-white rounded-lg shadow-sm p-8">
+              <div className="flex items-center gap-3 text-2xl font-semibold mb-4">
+                <FaTrophy className="text-yellow-500" /> Top Learners
+              </div>
+              <div className="space-y-6">
+                {paginatedLearners.length ? (
+                  paginatedLearners.map((learner, i) => (
+                    <UserCard key={learner.id} user={learner} type="learner" index={i} />
+                  ))
+                ) : (
+                  <p className="text-gray-600">No learners match your search.</p>
+                )}
+              </div>
+              <Pagination
+                currentPage={learnerPage}
+                totalPages={learnerTotalPages}
+                onPageChange={setLearnerPage}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Creators Tab */}
+        {activeTab === 'creators' && (
+          <div id="creators-panel" role="tabpanel" aria-labelledby="creators-tab">
+            <div className="border bg-white rounded-lg shadow-sm p-8">
+              <div className="flex items-center gap-3 text-2xl font-semibold mb-4">
+                <FaStar className="text-yellow-500" /> Top Creators
+              </div>
+              <div className="space-y-6">
+                {paginatedCreators.length ? (
+                  paginatedCreators.map((creator, i) => (
+                    <UserCard key={creator.id} user={creator} type="creator" index={i} />
+                  ))
+                ) : (
+                  <p className="text-gray-600">No creators match your search.</p>
+                )}
+              </div>
+              <Pagination
+                currentPage={creatorPage}
+                totalPages={creatorTotalPages}
+                onPageChange={setCreatorPage}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Achievements Tab */}
+        {activeTab === 'achievements' && (
+          <div id="achievements-panel" role="tabpanel" aria-labelledby="achievements-tab">
+            <div className="space-y-8">
+              <div className="border bg-white rounded-lg shadow-sm p-8">
+                <div className="flex items-center gap-3 text-2xl font-semibold mb-4">
+                  <FaBullseye className="text-purple-600" /> Weekly Challenge
+                </div>
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-lg font-semibold">Knowledge Explorer Challenge</h3>
+                    <p className="text-gray-600">Attend sessions in 3 different categories this week</p>
                   </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="creators" className="space-y-6">
-          <Card>
-            <CardHeader><CardTitle className="flex items-center gap-2"><FaStar className="text-yellow-500" /> Top Creators</CardTitle></CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {topCreators.map((creator) => (
-                  <div key={creator.id} className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
-                    <div className="flex items-center justify-center w-12 h-12">{rankIcon(creator.rank)}</div>
-                    <Avatar className="w-12 h-12"><AvatarImage src={creator.avatar} /><AvatarFallback>{creator.name.charAt(0)}</AvatarFallback></Avatar>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1"><h4 className="font-semibold">{creator.name}</h4><div className="flex items-center gap-1"><FaStar className="text-yellow-400" /><span className="text-sm font-medium">{creator.rating}</span></div><span className="text-sm text-green-600 flex items-center gap-1"><FaChartLine /> {creator.change}</span></div>
-                      <p className="text-sm text-gray-600 mb-2">{creator.specialty}</p>
-                      <div className="flex flex-wrap gap-1 mb-2">{creator.badges.slice(0, 2).map((b) => (<Badge key={b} variant="outline" className="text-xs">{b}</Badge>))}</div>
-                      <div className="flex gap-4 text-sm text-gray-600"><span>{creator.totalSessions} sessions</span><span>{creator.totalStudents} students</span></div>
+                  <div className="space-y-3">
+                    <div className="flex justify-between text-sm">
+                      <span>Progress</span>
+                      <span>2/3 Categories</span>
                     </div>
-                    <div className="text-right"><div className="text-lg font-bold">{creator.earnings}</div><div className="text-sm text-gray-600">earned</div></div>
+                    <div className="w-full bg-gray-200 rounded-full h-4">
+                      <div className="bg-blue-600 h-4 rounded-full" style={{ width: '66%' }}></div>
+                    </div>
                   </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="achievements" className="space-y-6">
-          <Card className="border-purple-200">
-            <CardHeader><CardTitle className="flex items-center gap-2"><FaBullseye className="text-purple-600" /> Weekly Challenge</CardTitle></CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div><h3 className="font-semibold mb-1">Knowledge Explorer Challenge</h3><p className="text-gray-600">Attend sessions in 3 different categories this week</p></div>
-                <div className="space-y-2"><div className="flex justify-between text-sm"><span>Progress</span><span>2/3</span></div><Progress value={66} className="h-3" /></div>
-                <div className="flex items-center justify-between"><div><p className="font-medium text-green-600">500 bonus points + Explorer badge</p><p className="text-sm text-gray-600">3 days left • 1247 participating</p></div></div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader><CardTitle className="flex items-center gap-2"><FaAward className="text-yellow-500" /> Achievement Gallery</CardTitle></CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {achievements.map((a) => {
-                  const Icon = a.icon
-                  return (
-                    <div key={a.name} className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center ${a.rarity === 'Legendary' ? 'bg-yellow-500' : a.rarity === 'Epic' ? 'bg-purple-500' : a.rarity === 'Rare' ? 'bg-blue-500' : 'bg-gray-500'}`}><Icon className="text-white" /></div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1"><h4 className="font-semibold">{a.name}</h4><Badge variant="outline" className={`text-xs ${rarityColor(a.rarity)}`}>{a.rarity}</Badge></div>
-                        <p className="text-sm text-gray-600 mb-1">{a.description}</p>
-                        <p className="text-xs text-gray-600">{a.earned} users earned this</p>
-                      </div>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-medium text-green-600">500 bonus points + Explorer badge</p>
+                      <p className="text-sm text-gray-600">3 days left • 1,247 participating</p>
                     </div>
-                  )
-                })}
+                    <button
+                      className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                      aria-label="View sessions for challenge"
+                    >
+                      View Sessions
+                    </button>
+                  </div>
+                </div>
               </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
+
+              <div className="border bg-white rounded-lg shadow-sm p-8">
+                <div className="flex items-center gap-3 text-2xl font-semibold mb-4">
+                  <FaAward className="text-yellow-500" /> Achievement Gallery
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {achievements.map((a) => (
+                    <AchievementCard key={a.id} achievement={a} />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Leaderboards
+UserCard.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    rank: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
+    level: PropTypes.string,
+    rating: PropTypes.number,
+    badges: PropTypes.arrayOf(PropTypes.string).isRequired,
+    points: PropTypes.number,
+    sessionsAttended: PropTypes.number,
+    questionsAsked: PropTypes.number,
+    totalSessions: PropTypes.number,
+    totalStudents: PropTypes.number,
+    specialty: PropTypes.string,
+    earnings: PropTypes.string,
+    change: PropTypes.string.isRequired,
+  }).isRequired,
+  type: PropTypes.oneOf(['learner', 'creator']).isRequired,
+  index: PropTypes.number.isRequired,
+};
 
+AchievementCard.propTypes = {
+  achievement: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    rarity: PropTypes.string.isRequired,
+    icon: PropTypes.elementType.isRequired,
+    earnedBy: PropTypes.number.isRequired,
+  }).isRequired,
+};
 
+Pagination.propTypes = {
+  currentPage: PropTypes.number.isRequired,
+  totalPages: PropTypes.number.isRequired,
+  onPageChange: PropTypes.func.isRequired,
+};
+
+export default Leaderboards;
