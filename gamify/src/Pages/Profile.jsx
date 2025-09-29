@@ -30,12 +30,14 @@ const Profile = () => {
   const [selectedAvatar, setSelectedAvatar] = useState(user?.avatar)
   const [showAvatarOptions, setShowAvatarOptions] = useState(false)
   const [newSkill, setNewSkill] = useState("")
+  const [coverImage, setCoverImage] = useState(null)
+  const [showCoverOptions, setShowCoverOptions] = useState(false)
 
   const achievements = [
-    { id: 1, name: "First Session", icon: "🎯", earned: true },
-    { id: 2, name: "100 Answers", icon: "💯", earned: true },
-    { id: 3, name: "Top Contributor", icon: "🏆", earned: true },
-    { id: 4, name: "Mentor", icon: "👨‍🏫", earned: false },
+    { id: 1, name: "First Session", icon: Trophy, earned: true, description: "Hosted your first session" },
+    { id: 2, name: "100 Answers", icon: Target, earned: true, description: "Answered 100 questions" },
+    { id: 3, name: "Top Contributor", icon: Crown, earned: true, description: "Top 10% contributor" },
+    { id: 4, name: "Mentor", icon: Users, earned: false, description: "Helped 50+ users" },
   ]
 
   const avatarOptions = [
@@ -78,6 +80,24 @@ const Profile = () => {
     input.click()
   }
 
+  const handleCoverUpload = () => {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = 'image/*'
+    input.onchange = (e) => {
+      const file = e.target.files?.[0]
+      if (file) {
+        const reader = new FileReader()
+        reader.onload = (ev) => {
+          const result = ev.target?.result
+          setCoverImage(result)
+        }
+        reader.readAsDataURL(file)
+      }
+    }
+    input.click()
+  }
+
   const addSkill = () => {
     if (newSkill.trim() && !user.badges.includes(newSkill.trim())) {
       updateUser(prev => ({ ...prev, badges: [...prev.badges, newSkill.trim()] }))
@@ -90,20 +110,20 @@ const Profile = () => {
   }
 
   const StatCard = ({ icon: Icon, label, value, trend, color = "blue" }) => (
-    <div className={`${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} rounded-xl p-4 border hover:shadow-md transition-shadow`}>
+    <div className={`${isDarkMode ? 'bg-gray-800/50 border-gray-700' : 'bg-white border-gray-200'} rounded-xl p-4 border backdrop-blur-sm hover:shadow-lg hover:scale-[1.02] transition-all duration-200`}>
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className={`p-2 rounded-lg ${isDarkMode ? `bg-${color}-900/30` : `bg-${color}-100`}`}>
-            <Icon className={`h-5 w-5 ${isDarkMode ? `text-${color}-400` : `text-${color}-600`}`} />
+        <div className="flex items-center gap-4">
+          <div className={`p-3 rounded-xl ${isDarkMode ? `bg-gradient-to-br from-${color}-500/20 to-${color}-600/30` : `bg-gradient-to-br from-${color}-50 to-${color}-100`}`}>
+            <Icon className={`h-6 w-6 ${isDarkMode ? `text-${color}-400` : `text-${color}-600`}`} />
           </div>
           <div>
-            <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{label}</p>
-            <p className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{value}</p>
+            <p className={`text-sm font-medium ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{label}</p>
+            <p className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{value}</p>
           </div>
         </div>
         {trend && (
-          <div className="flex items-center text-green-500 text-sm">
-            <TrendingUp className="h-4 w-4 mr-1" />
+          <div className="flex items-center gap-1 px-2 py-1 bg-green-500/10 text-green-600 text-sm font-medium rounded-full">
+            <TrendingUp className="h-3 w-3" />
             +{trend}%
           </div>
         )}
@@ -163,12 +183,38 @@ const Profile = () => {
           {/* Main Content */}
           <div className="xl:col-span-3 space-y-8">
             {/* Profile Header Card */}
-            <div className={`${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} rounded-2xl border overflow-hidden`}>
-              <div className="h-32 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
-              <div className="p-8 -mt-16">
+            <div className={`${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} rounded-2xl border overflow-hidden shadow-lg`}>
+              {/* Cover Image Section */}
+              <div className="relative h-48 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 overflow-hidden">
+                {coverImage ? (
+                  <img
+                    src={coverImage}
+                    alt="Cover"
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
+                )}
+                {isEditing && (
+                  <div className="absolute top-4 right-4 flex gap-2">
+                    <button
+                      onClick={handleCoverUpload}
+                      className="bg-black/50 hover:bg-black/70 text-white p-2 rounded-full backdrop-blur-sm transition-colors"
+                      title="Upload cover image"
+                    >
+                      <Camera className="h-4 w-4" />
+                    </button>
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+              </div>
+
+              {/* Profile Info Section */}
+              <div className="p-8 -mt-20">
                 <div className="flex flex-col md:flex-row items-start md:items-end gap-6">
+                  {/* Avatar */}
                   <div className="relative">
-                    <div className={`w-32 h-32 rounded-full border-4 overflow-hidden ${isDarkMode ? 'border-gray-800 bg-gray-800' : 'border-white bg-white'}`}>
+                    <div className={`w-32 h-32 rounded-full border-4 overflow-hidden shadow-lg ${isDarkMode ? 'border-gray-800 bg-gray-800' : 'border-white bg-white'}`}>
                       <img src={selectedAvatar || user.avatar} alt={user.name} className="w-full h-full object-cover" />
                     </div>
                     {isEditing && (
@@ -176,7 +222,7 @@ const Profile = () => {
                         <button
                           onClick={handleAvatarUpload}
                           className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full shadow-lg transition-colors"
-                          title="Upload custom image"
+                          title="Upload avatar"
                         >
                           <Camera className="h-4 w-4" />
                         </button>
@@ -190,13 +236,14 @@ const Profile = () => {
                       </div>
                     )}
                   </div>
-                  
+
+                  {/* User Info */}
                   <div className="flex-1 space-y-4">
                     <div>
                       <h2 className={`text-3xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{user.name}</h2>
                       <p className={`${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{user.email}</p>
-                      <div className="flex items-center gap-4 mt-2">
-                        <span className="inline-flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-yellow-400 to-orange-500 text-white rounded-full text-sm font-medium">
+                      <div className="flex flex-wrap items-center gap-3 mt-3">
+                        <span className="inline-flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-yellow-400 to-orange-500 text-white rounded-full text-sm font-medium shadow-sm">
                           <Crown className="h-4 w-4" />
                           {user.level}
                         </span>
@@ -212,6 +259,7 @@ const Profile = () => {
                   </div>
                 </div>
 
+                {/* Avatar Options */}
                 {isEditing && showAvatarOptions && (
                   <div className={`mt-6 p-4 rounded-lg ${isDarkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
                     <h4 className={`text-sm font-medium mb-3 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Choose a default avatar:</h4>
@@ -411,32 +459,67 @@ const Profile = () => {
             </div>
 
             {/* Achievements */}
-            <div className={`${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} rounded-2xl p-6 border`}>
+            <div className={`${isDarkMode ? 'bg-gray-800/50 border-gray-700' : 'bg-white border-gray-200'} rounded-2xl p-6 border backdrop-blur-sm`}>
               <h3 className={`text-lg font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Achievements</h3>
-              <div className="space-y-3">
-                {achievements.map((achievement) => (
-                  <div key={achievement.id} className={`flex items-center gap-3 p-3 rounded-lg ${
-                    achievement.earned 
-                      ? isDarkMode ? 'bg-gradient-to-r from-yellow-900/20 to-orange-900/20' : 'bg-gradient-to-r from-yellow-50 to-orange-50'
-                      : isDarkMode ? 'bg-gray-700' : 'bg-gray-50'
-                  }`}>
-                    <span className={`text-2xl ${achievement.earned ? '' : 'grayscale opacity-50'}`}>
-                      {achievement.icon}
-                    </span>
-                    <div className="flex-1">
-                      <p className={`font-medium ${
-                        achievement.earned 
-                          ? isDarkMode ? 'text-white' : 'text-gray-900'
-                          : isDarkMode ? 'text-gray-400' : 'text-gray-500'
+              <div className="space-y-4">
+                {achievements.map((achievement) => {
+                  const IconComponent = achievement.icon
+                  return (
+                    <div key={achievement.id} className={`flex items-center gap-4 p-4 rounded-xl border transition-all duration-200 ${
+                      achievement.earned
+                        ? isDarkMode
+                          ? 'bg-gradient-to-r from-yellow-900/20 to-orange-900/20 border-yellow-500/30'
+                          : 'bg-gradient-to-r from-yellow-50 to-orange-50 border-yellow-200'
+                        : isDarkMode
+                          ? 'bg-gray-700/50 border-gray-600'
+                          : 'bg-gray-50 border-gray-200'
+                    }`}>
+                      <div className={`p-3 rounded-xl ${
+                        achievement.earned
+                          ? isDarkMode
+                            ? 'bg-yellow-500/20'
+                            : 'bg-yellow-100'
+                          : isDarkMode
+                            ? 'bg-gray-600'
+                            : 'bg-gray-200'
                       }`}>
-                        {achievement.name}
-                      </p>
-                      {achievement.earned && (
-                        <p className={`text-xs ${isDarkMode ? 'text-yellow-400' : 'text-yellow-600'}`}>Earned!</p>
-                      )}
+                        <IconComponent className={`h-6 w-6 ${
+                          achievement.earned
+                            ? isDarkMode
+                              ? 'text-yellow-400'
+                              : 'text-yellow-600'
+                            : isDarkMode
+                              ? 'text-gray-500'
+                              : 'text-gray-400'
+                        }`} />
+                      </div>
+                      <div className="flex-1">
+                        <p className={`font-semibold ${
+                          achievement.earned
+                            ? isDarkMode ? 'text-white' : 'text-gray-900'
+                            : isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                        }`}>
+                          {achievement.name}
+                        </p>
+                        <p className={`text-sm ${
+                          achievement.earned
+                            ? isDarkMode ? 'text-yellow-400' : 'text-yellow-600'
+                            : isDarkMode ? 'text-gray-500' : 'text-gray-400'
+                        }`}>
+                          {achievement.description}
+                        </p>
+                        {achievement.earned && (
+                          <div className={`inline-flex items-center gap-1 mt-1 px-2 py-1 rounded-full text-xs font-medium ${
+                            isDarkMode ? 'bg-yellow-500/20 text-yellow-400' : 'bg-yellow-100 text-yellow-700'
+                          }`}>
+                            <Trophy className="h-3 w-3" />
+                            Earned
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             </div>
 

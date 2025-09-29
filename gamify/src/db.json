@@ -1367,33 +1367,33 @@
   "liveSessions": {
     "currentSession": {
       "id": "session-1",
-      "title": "Sample Live Session",
+      "title": "Advanced React Performance Optimization",
       "creator": {
-        "id": 101,
-        "name": "Demo Creator",
-        "avatar": "/avatars/demo.jpg",
-        "fallbackAvatar": "https://ui-avatars.com/api/?name=Demo+Creator",
-        "title": "Educator",
-        "rating": 4.5,
-        "followers": 1000,
+        "id": 16,
+        "name": "David Smith",
+        "avatar": "https://i.pravatar.cc/150?img=16",
+        "fallbackAvatar": "https://ui-avatars.com/api/?name=David+Smith",
+        "title": "Senior React Developer",
+        "rating": 4.9,
+        "followers": 15420,
         "isVerified": true
       },
       "status": {
         "isLive": true,
-        "viewers": 250,
+        "viewers": 1247,
         "maxViewers": 2000,
         "startTime": "2025-09-24T14:00:00Z",
-        "duration": "15:00",
+        "duration": "45:23",
         "estimatedEndTime": "2025-09-24T15:00:00Z"
       },
       "metadata": {
         "category": "Technology",
-        "subcategory": "Demo",
-        "description": "Sample description for testing frontend.",
-        "tags": ["demo", "test"],
+        "subcategory": "Web Development",
+        "description": "Deep dive into React performance optimization techniques including code splitting, memoization, virtualization, and bundle analysis. Learn how to build lightning-fast React applications.",
+        "tags": ["React", "Performance", "JavaScript", "Web Development"],
         "language": "en",
-        "level": "Beginner",
-        "prerequisites": []
+        "level": "Advanced",
+        "prerequisites": ["Intermediate React knowledge", "JavaScript ES6+"]
       },
       "interaction": {
         "chatEnabled": true,
@@ -1404,15 +1404,107 @@
       }
     },
     "chat": {
-      "messages": [],
+      "messages": [
+        {
+          "id": 1,
+          "user": "Alex Chen",
+          "avatar": "https://i.pravatar.cc/150?img=1",
+          "message": "Great explanation about React.memo! Could you show a practical example?",
+          "timestamp": "14:05",
+          "isQuestion": true,
+          "likes": 12,
+          "isModerator": false
+        },
+        {
+          "id": 2,
+          "user": "Maria Garcia",
+          "avatar": "https://i.pravatar.cc/150?img=2",
+          "message": "Thanks for the session! Very helpful insights on code splitting.",
+          "timestamp": "14:07",
+          "isQuestion": false,
+          "likes": 8,
+          "isModerator": false
+        },
+        {
+          "id": 3,
+          "user": "David Smith",
+          "avatar": "https://i.pravatar.cc/150?img=16",
+          "message": "Happy to help! Let me share a quick example of React.memo in action.",
+          "timestamp": "14:08",
+          "isQuestion": false,
+          "likes": 15,
+          "isModerator": true
+        },
+        {
+          "id": 4,
+          "user": "Sarah Johnson",
+          "avatar": "https://i.pravatar.cc/150?img=5",
+          "message": "What's your recommendation for handling large lists in React?",
+          "timestamp": "14:10",
+          "isQuestion": true,
+          "likes": 6,
+          "isModerator": false
+        },
+        {
+          "id": 5,
+          "user": "Mike Wilson",
+          "avatar": "https://i.pravatar.cc/150?img=8",
+          "message": "This is exactly what I needed for my current project! Thanks!",
+          "timestamp": "14:12",
+          "isQuestion": false,
+          "likes": 4,
+          "isModerator": false
+        }
+      ],
       "stats": {
-        "totalMessages": 0
+        "totalMessages": 5
       }
     },
     "questionQueue": {
-      "questions": [],
+      "questions": [
+        {
+          "id": 1,
+          "user": "Emma Davis",
+          "avatar": "https://i.pravatar.cc/150?img=11",
+          "question": "How do you handle performance optimization in React applications with many concurrent API calls?",
+          "timestamp": "14:03",
+          "votes": 23
+        },
+        {
+          "id": 2,
+          "user": "John Lee",
+          "avatar": "https://i.pravatar.cc/150?img=4",
+          "question": "What's the best approach for optimizing bundle size in production builds?",
+          "timestamp": "14:06",
+          "votes": 18
+        },
+        {
+          "id": 3,
+          "user": "Lisa Wang",
+          "avatar": "https://i.pravatar.cc/150?img=7",
+          "question": "Can you explain the difference between useMemo and useCallback with examples?",
+          "timestamp": "14:09",
+          "votes": 15
+        },
+        {
+          "id": 4,
+          "user": "Tom Anderson",
+          "avatar": "https://i.pravatar.cc/150?img=10",
+          "question": "How do you debug performance issues in React DevTools?",
+          "timestamp": "14:11",
+          "votes": 12
+        },
+        {
+          "id": 5,
+          "user": "Rachel Green",
+          "avatar": "https://i.pravatar.cc/150?img=13",
+          "question": "What's your recommended approach for handling heavy computations in React components?",
+          "timestamp": "14:13",
+          "votes": 9
+        }
+      ],
       "stats": {
-        "totalQuestions": 0
+        "totalQuestions": 5
       }
     }
   },
