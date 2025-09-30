@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
     Play,
     Pause,
@@ -122,6 +123,7 @@ const Separator = ({ orientation = 'horizontal', className = '' }) => {
 };
 
 function LiveSession() {
+    const location = useLocation();
     const [sessionData, setSessionData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -145,30 +147,53 @@ function LiveSession() {
     };
 
     useEffect(() => {
-        const fetchSessionData = async () => {
+        const initializeSession = async () => {
             try {
                 setLoading(true);
                 setError(null);
 
-                // Simulate API call delay
-                await new Promise(resolve => setTimeout(resolve, 1000));
+                // Check if session data was passed from Create.jsx
+                const passedSessionData = location.state?.session;
 
-                const response = await fetch('/src/db.json');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch session data');
+                if (passedSessionData) {
+                    // Use the session data passed from Create.jsx
+                    const formattedSessionData = {
+                        id: passedSessionData.id,
+                        title: passedSessionData.title,
+                        metadata: {
+                            description: passedSessionData.description,
+                            tags: passedSessionData.tags || [],
+                        },
+                        creator: passedSessionData.creator,
+                        status: {
+                            viewers: Math.floor(Math.random() * 50) + 10, // Random initial viewers
+                            duration: '00:00:00',
+                            startTime: new Date().toISOString(),
+                        },
+                    };
+
+                    setSessionData(formattedSessionData);
+                    setMessages([]);
+                    setQuestions([]);
+                } else {
+                    // Fallback to fetching from JSON if no session data passed
+                    const response = await fetch('/src/db.json');
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch session data');
+                    }
+
+                    const data = await response.json();
+
+                    if (!data.liveSessions?.currentSession) {
+                        throw new Error('Session data not found');
+                    }
+
+                    setSessionData(data.liveSessions.currentSession);
+                    setMessages(data.liveSessions.chat.messages || []);
+                    setQuestions(data.liveSessions.questionQueue.questions || []);
                 }
 
-                const data = await response.json();
-
-                if (!data.liveSessions?.currentSession) {
-                    throw new Error('Session data not found');
-                }
-
-                setSessionData(data.liveSessions.currentSession);
-                setMessages(data.liveSessions.chat.messages || []);
-                setQuestions(data.liveSessions.questionQueue.questions || []);
-
-                // Simulate real-time updates
+                // Simulate real-time updates for viewer count and duration
                 const interval = setInterval(() => {
                     setSessionData(prev => prev ? {
                         ...prev,
@@ -183,15 +208,15 @@ function LiveSession() {
                 return () => clearInterval(interval);
 
             } catch (err) {
-                console.error('Error fetching session data:', err);
+                console.error('Error initializing session:', err);
                 setError(err.message);
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchSessionData();
-    }, []);
+        initializeSession();
+    }, [location.state?.session]);
 
     useEffect(() => {
         scrollToBottom();

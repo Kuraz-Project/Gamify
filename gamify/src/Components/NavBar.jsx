@@ -53,7 +53,7 @@ const NavBar = () => {
                     </li>
                     <li>
                         <Link 
-                        to="/leader" 
+                        to="/leaderboards" 
                         className={`flex items-center gap-2 transition-colors duration-200 hover:text-blue-600 ${
                             isActiveLink('/leader') ? 'text-blue-600 font-semibold' : 'text-gray-700'
                         }`}

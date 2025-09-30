@@ -61,7 +61,7 @@ const Home = () => {
   const [categories, setCategories] = useState([])
   const [testimonials, setTestimonials] = useState([])
   const [stats, setStats] = useState([])
-  const [features] = useState([
+  const [features, setFeatures] = useState([
     { icon: FaTrophy, title: 'Earn as You Learn', description: 'Get rewarded with points for every question asked, answer provided, and session attended.', benefits: ['10-50 points per session', 'Bonus for top questions', 'Weekly achievement rewards'] },
     { icon: FaUsers, title: 'Connect with Experts', description: 'Direct access to industry leaders, successful entrepreneurs, and domain specialists.', benefits: ['1-on-1 expert sessions', 'Group discussions', 'Mentorship opportunities'] },
     { icon: FaBullseye, title: 'Personalized Learning', description: 'AI-powered recommendations based on your interests, goals, and learning progress.', benefits: ['Custom session feeds', 'Skill-based matching', 'Progress tracking'] },
@@ -72,58 +72,54 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch users, live sessions, and leaderboards
-        const [usersRes, liveSessionsRes, leaderboardsRes] = await Promise.all([
-          fetch('http://localhost:3000/users'),
-          fetch('http://localhost:3000/liveSessions'),
-          fetch('http://localhost:3000/leaderboards')
-        ])
-        const users = await usersRes.json()
-        const liveSessions = await liveSessionsRes.json()
-        const leaderboards = await leaderboardsRes.json()
+        // Fetch data from local db.json file
+        const response = await fetch('./db.json')
+        const data = await response.json()
 
+        const { users, sessions, leaderboards, liveSessions } = data
         const currentDate = new Date('2025-09-24')
 
-        // Upcoming Sessions
-        const upcoming = []
-        users.forEach(user => {
-          user.content.schedule.forEach(sched => {
-            const schedDate = new Date(sched.date.replace('Z', ''))
-            if (schedDate > currentDate) {
-              upcoming.push({
-                id: sched.id,
-                title: sched.topic,
-                creator: user.username,
-                avatar: user.profile.avatar,
-                date: sched.date.split('T')[0],
-                time: sched.date.split('T')[1].replace('Z', ''),
-                participants: sched.currentAttendees,
-                category: user.achievements.badges[0] || 'General',
-                image: user.content.creations[0]?.thumbnail || 'https://images.unsplash.com/photo-1585404544089-b386c0723dd4?q=80&w=1080&auto=format&fit=crop'
-              })
+        // Upcoming Sessions - use sessions data from db.json
+        const upcoming = sessions
+          .filter(session => {
+            const sessionDate = new Date(session.date)
+            return sessionDate > currentDate && !session.live
+          })
+          .slice(0, 3)
+          .map(session => {
+            const creator = users.find(user => user.username === session.creator)
+            return {
+              id: session.id,
+              title: session.title,
+              creator: session.creator,
+              avatar: session.avatar,
+              date: session.date,
+              time: session.time,
+              participants: session.participants,
+              category: session.category,
+              image: session.image,
+              rating: session.rating,
+              live: session.live
             }
           })
-        })
-        setUpcomingSessions(upcoming.slice(0, 3))
+        setUpcomingSessions(upcoming)
 
-        // Trending Sessions
-        const allCreations = []
-        users.forEach(user => {
-          user.content.creations.forEach(creation => {
-            allCreations.push({
-              id: creation.id,
-              title: creation.title,
-              creator: user.username,
-              participants: creation.views,
-              rating: user.performance.averageRating,
-              category: user.achievements.badges[0] || 'General'
-            })
-          })
-        })
-        const trending = allCreations.sort((a, b) => b.participants - a.participants).slice(0, 3)
+        // Trending Sessions - use sessions data sorted by participants
+        const trending = sessions
+          .filter(session => !session.live)
+          .sort((a, b) => b.participants - a.participants)
+          .slice(0, 3)
+          .map(session => ({
+            id: session.id,
+            title: session.title,
+            creator: session.creator,
+            participants: session.participants,
+            rating: session.rating,
+            category: session.category
+          }))
         setTrendingSessions(trending)
 
-        // Featured Creators
+        // Featured Creators - use top users from db.json
         const featured = users
           .sort((a, b) => b.performance.averageRating - a.performance.averageRating)
           .slice(0, 4)
@@ -138,23 +134,37 @@ const Home = () => {
           }))
         setFeaturedCreators(featured)
 
-        // Categories
-        const allBadges = new Set()
-        users.forEach(user => {
-          user.achievements.badges.forEach(badge => allBadges.add(badge))
+        // Categories - extract unique categories from sessions
+        const allCategories = new Set()
+        sessions.forEach(session => {
+          if (session.category) allCategories.add(session.category)
         })
-        const catData = Array.from(allBadges).map((cat, i) => ({
-          name: cat,
-          icon: [FaBolt, FaTrophy, FaGift, FaShieldAlt, FaCommentDots, FaUsers][i % 6],
-          count: users.filter(u => u.achievements.badges.includes(cat)).length * 10,
-          description: `Explore ${cat.toLowerCase()} with top experts and engaging sessions.`,
-          highlight: `Top session: ${cat} Masterclass`,
-          color: 'border-gray-200',
-          bgColor: 'bg-gray-600'
-        }))
+
+        const catData = Array.from(allCategories).map((cat, i) => {
+          const categorySessions = sessions.filter(s => s.category === cat)
+          const iconMap = {
+            'Technology': FaBolt,
+            'Business': FaTrophy,
+            'Creative': FaGift,
+            'Finance': FaShieldAlt,
+            'Marketing': FaCommentDots,
+            'General': FaUsers
+          }
+          const Icon = iconMap[cat] || FaUsers
+
+          return {
+            name: cat,
+            icon: Icon,
+            count: categorySessions.length * 10,
+            description: `Explore ${cat.toLowerCase()} with top experts and engaging sessions.`,
+            highlight: `Top session: ${cat} Masterclass`,
+            color: 'border-gray-200',
+            bgColor: 'bg-gray-600'
+          }
+        })
         setCategories(catData)
 
-        // Testimonials
+        // Testimonials - use top users as testimonials
         const tests = users.slice(0, 3).map(user => ({
           id: user.id,
           name: user.username,
@@ -166,8 +176,8 @@ const Home = () => {
         }))
         setTestimonials(tests)
 
-        // Stats
-        const totalSessions = users.reduce((acc, u) => acc + u.content.schedule.length, 0)
+        // Stats - calculate from db.json data
+        const totalSessions = sessions.length
         const totalPoints = users.reduce((acc, u) => acc + u.achievements.points, 0)
         const totalSuccess = leaderboards.achievements.available.reduce((acc, a) => acc + a.earnedBy, 0)
         setStats([

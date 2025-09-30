@@ -56,7 +56,7 @@ const router = createBrowserRouter(
     <Route path = "/" element = {<MainLayout />}>
       <Route index element={<Home />}/> 
       <Route path='explore' element={<Explore />}/>
-      <Route path='leader' element={<Leaderboards />}/>
+      {/* <Route path='leader' element={<Leaderboards />}/> */}
       <Route path='leaderboards' element={<Leaderboards />}/>
       <Route path='profile' element={<Profile />}/>
       <Route path='livesessions' element={<LiveSession />}/>
