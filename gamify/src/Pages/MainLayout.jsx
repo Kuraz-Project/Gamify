@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import NavBar from '../Components/NavBar';
-import SideBar from '../Components/SideBar';
+import SideBar from '../Components/Sidebar';
 import Footer from '../Components/Footer';
 import { Menu, X, Bell, Settings, User, ChevronRight, ChevronLeft } from 'lucide-react';
 import { useAuth } from '../App';
@@ -53,7 +53,7 @@ const MainLayout = () => {
                   onClick={toggleNotifications}
                   aria-label="Notifications"
                 >
-                  <Bell size={20} className="text-gray-600" />
+                  <Bell size={30} className="text-gray-600" />
                   {isNotificationsOpen && (
                     <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg p-4 z-50">
                       <h3 className="text-sm font-semibold text-gray-800 mb-2">Notifications</h3>
@@ -76,9 +76,9 @@ const MainLayout = () => {
                   onClick={toggleSettings}
                   aria-label="Settings"
                 >
-                  <Settings size={20} className="text-gray-600" />
+                  <Settings size={30} className="text-gray-600" />
                   {isSettingsOpen && (
-                    <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg p-4 z-50">
+                    <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg p-2 z-50">
                       <h3 className="text-sm font-semibold text-gray-800 mb-2">Settings</h3>
                       <ul className="space-y-2 text-sm text-gray-600">
                         <li className="p-2 hover:bg-gray-50 rounded">
@@ -95,7 +95,7 @@ const MainLayout = () => {
                   )}
                 </button>
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full overflow-hidden">
+                  <div className="w-10 h-10 rounded-full overflow-hidden">
                     <img
                       src={user?.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face'}
                       alt="User Avatar"
