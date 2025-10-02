@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
     Play,
@@ -28,7 +28,9 @@ import {
     Clock,
     Eye,
     MessageSquare,
-    HelpCircle
+    HelpCircle,
+    Wifi,
+    WifiOff
 } from 'lucide-react';
 
 // Custom UI Components using Tailwind
@@ -122,29 +124,11 @@ const Separator = ({ orientation = 'horizontal', className = '' }) => {
     );
 };
 
-function LiveSession() {
-    const location = useLocation();
+// Custom hooks for better organization
+const useSessionData = (location) => {
     const [sessionData, setSessionData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [isPlaying, setIsPlaying] = useState(true);
-    const [isMuted, setIsMuted] = useState(false);
-    const [chatMessage, setChatMessage] = useState('');
-    const [isHandRaised, setIsHandRaised] = useState(false);
-    const [isMicOn, setIsMicOn] = useState(false);
-    const [isVideoOn, setIsVideoOn] = useState(false);
-    const [isFollowing, setIsFollowing] = useState(false);
-    const [activeTab, setActiveTab] = useState('chat');
-    const [showEmoji, setShowEmoji] = useState(false);
-    const [connectionStatus, setConnectionStatus] = useState('connected');
-
-    const [messages, setMessages] = useState([]);
-    const [questions, setQuestions] = useState([]);
-    const messagesEndRef = useRef(null);
-
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    };
 
     useEffect(() => {
         const initializeSession = async () => {
@@ -152,11 +136,9 @@ function LiveSession() {
                 setLoading(true);
                 setError(null);
 
-                // Check if session data was passed from Create.jsx
                 const passedSessionData = location.state?.session;
 
                 if (passedSessionData) {
-                    // Use the session data passed from Create.jsx
                     const formattedSessionData = {
                         id: passedSessionData.id,
                         title: passedSessionData.title,
@@ -166,17 +148,14 @@ function LiveSession() {
                         },
                         creator: passedSessionData.creator,
                         status: {
-                            viewers: Math.floor(Math.random() * 50) + 10, // Random initial viewers
+                            viewers: Math.floor(Math.random() * 50) + 10,
                             duration: '00:00:00',
                             startTime: new Date().toISOString(),
                         },
                     };
 
                     setSessionData(formattedSessionData);
-                    setMessages([]);
-                    setQuestions([]);
                 } else {
-                    // Fallback to fetching from JSON if no session data passed
                     const response = await fetch('/src/db.json');
                     if (!response.ok) {
                         throw new Error('Failed to fetch session data');
@@ -189,24 +168,7 @@ function LiveSession() {
                     }
 
                     setSessionData(data.liveSessions.currentSession);
-                    setMessages(data.liveSessions.chat.messages || []);
-                    setQuestions(data.liveSessions.questionQueue.questions || []);
                 }
-
-                // Simulate real-time updates for viewer count and duration
-                const interval = setInterval(() => {
-                    setSessionData(prev => prev ? {
-                        ...prev,
-                        status: {
-                            ...prev.status,
-                            viewers: prev.status.viewers + Math.floor(Math.random() * 3) - 1,
-                            duration: new Date(Date.now() - new Date(prev.status.startTime).getTime()).toISOString().substr(11, 8)
-                        }
-                    } : null);
-                }, 5000);
-
-                return () => clearInterval(interval);
-
             } catch (err) {
                 console.error('Error initializing session:', err);
                 setError(err.message);
@@ -218,11 +180,42 @@ function LiveSession() {
         initializeSession();
     }, [location.state?.session]);
 
+    return { sessionData, setSessionData, loading, error };
+};
+
+const useRealTimeUpdates = (sessionData, setSessionData) => {
+    useEffect(() => {
+        if (!sessionData) return;
+
+        const interval = setInterval(() => {
+            setSessionData(prev => prev ? {
+                ...prev,
+                status: {
+                    ...prev.status,
+                    viewers: Math.max(0, prev.status.viewers + Math.floor(Math.random() * 3) - 1),
+                    duration: new Date(Date.now() - new Date(prev.status.startTime).getTime()).toISOString().substr(11, 8)
+                }
+            } : null);
+        }, 10000); // Reduced frequency for better performance
+
+        return () => clearInterval(interval);
+    }, [sessionData, setSessionData]);
+};
+
+const useChat = (sessionData) => {
+    const [messages, setMessages] = useState([]);
+    const [chatMessage, setChatMessage] = useState('');
+    const messagesEndRef = useRef(null);
+
+    const scrollToBottom = useCallback(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, []);
+
     useEffect(() => {
         scrollToBottom();
-    }, [messages]);
+    }, [messages, scrollToBottom]);
 
-    const handleSendMessage = () => {
+    const handleSendMessage = useCallback(() => {
         if (!chatMessage.trim() || !sessionData) return;
 
         const newMessage = {
@@ -245,19 +238,108 @@ function LiveSession() {
                 msg.id === newMessage.id ? { ...msg, id: msg.id + 1000 } : msg
             ));
         }, 1000);
-    };
+    }, [chatMessage, sessionData]);
 
-    const handleLikeMessage = (messageId) => {
+    const handleLikeMessage = useCallback((messageId) => {
         setMessages(prev => prev.map(msg =>
             msg.id === messageId ? { ...msg, likes: msg.likes + 1 } : msg
         ));
-    };
+    }, []);
 
-    const handleVoteQuestion = (questionId) => {
+    return {
+        messages,
+        chatMessage,
+        setChatMessage,
+        handleSendMessage,
+        handleLikeMessage,
+        messagesEndRef
+    };
+};
+
+const useQuestions = () => {
+    const [questions, setQuestions] = useState([]);
+
+    const handleVoteQuestion = useCallback((questionId) => {
         setQuestions(prev => prev.map(q =>
             q.id === questionId ? { ...q, votes: q.votes + 1 } : q
         ));
+    }, []);
+
+    return { questions, setQuestions, handleVoteQuestion };
+};
+
+const useParticipantControls = () => {
+    const [isHandRaised, setIsHandRaised] = useState(false);
+    const [isMicOn, setIsMicOn] = useState(false);
+    const [isVideoOn, setIsVideoOn] = useState(false);
+    const [isFollowing, setIsFollowing] = useState(false);
+    const [connectionStatus, setConnectionStatus] = useState('connected');
+
+    return {
+        isHandRaised,
+        setIsHandRaised,
+        isMicOn,
+        setIsMicOn,
+        isVideoOn,
+        setIsVideoOn,
+        isFollowing,
+        setIsFollowing,
+        connectionStatus,
+        setConnectionStatus
     };
+};
+
+const useKeyboardShortcuts = (handlers) => {
+    useEffect(() => {
+        const handleKeyPress = (e) => {
+            // Ctrl/Cmd + K to toggle mic
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                handlers.toggleMic?.();
+            }
+            // Ctrl/Cmd + V to toggle video
+            if ((e.ctrlKey || e.metaKey) && e.key === 'v') {
+                e.preventDefault();
+                handlers.toggleVideo?.();
+            }
+            // Ctrl/Cmd + H to toggle hand
+            if ((e.ctrlKey || e.metaKey) && e.key === 'h') {
+                e.preventDefault();
+                handlers.toggleHand?.();
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyPress);
+        return () => document.removeEventListener('keydown', handleKeyPress);
+    }, [handlers]);
+};
+
+function LiveSession() {
+    const location = useLocation();
+    const [activeTab, setActiveTab] = useState('chat');
+
+    // Use custom hooks
+    const { sessionData, setSessionData, loading, error } = useSessionData(location);
+    const { messages, chatMessage, setChatMessage, handleSendMessage, handleLikeMessage, messagesEndRef } = useChat(sessionData);
+    const { questions, setQuestions, handleVoteQuestion } = useQuestions();
+    const controls = useParticipantControls();
+
+    // Real-time updates
+    useRealTimeUpdates(sessionData, setSessionData);
+
+    // Keyboard shortcuts
+    useKeyboardShortcuts({
+        toggleMic: () => controls.setIsMicOn(!controls.isMicOn),
+        toggleVideo: () => controls.setIsVideoOn(!controls.isVideoOn),
+        toggleHand: () => controls.setIsHandRaised(!controls.isHandRaised),
+    });
+
+    // Initialize questions data when session loads
+    useEffect(() => {
+        if (sessionData) {
+            setQuestions([]);
+        }
+    }, [sessionData]);
 
     const handleShare = async () => {
         try {
@@ -382,7 +464,7 @@ function LiveSession() {
 
                         {/* Connection Status Indicator */}
                         <div className="absolute top-6 right-6 space-y-1">
-                            <div className={`w-3 h-3 rounded-full ${connectionStatus === 'connected' ? 'bg-green-500' : 'bg-red-500'} shadow-lg`}></div>
+                            <div className={`w-3 h-3 rounded-full ${controls.connectionStatus === 'connected' ? 'bg-green-500' : 'bg-red-500'} shadow-lg`}></div>
                         </div>
 
                         {/* Enhanced Video Controls */}
@@ -393,17 +475,17 @@ function LiveSession() {
                                         size="sm"
                                         variant="ghost"
                                         className="text-white hover:bg-white/20 hover:scale-110 transition-all duration-200"
-                                        onClick={() => setIsPlaying(!isPlaying)}
+                                        onClick={() => {}}
                                     >
-                                        {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
+                                        <Play className="h-5 w-5" />
                                     </Button>
                                     <Button
                                         size="sm"
                                         variant="ghost"
                                         className="text-white hover:bg-white/20 hover:scale-110 transition-all duration-200"
-                                        onClick={() => setIsMuted(!isMuted)}
+                                        onClick={() => {}}
                                     >
-                                        {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+                                        <Volume2 className="h-5 w-5" />
                                     </Button>
                                     <div className="bg-black/40 rounded-lg px-3 py-1">
                                         <span className="text-white text-sm font-mono">{sessionData?.status?.duration}</span>
@@ -485,10 +567,10 @@ function LiveSession() {
                                     </div>
                                 </div>
                                 <Button
-                                    onClick={() => setIsFollowing(!isFollowing)}
-                                    variant={isFollowing ? "outline" : "default"}
+                                    onClick={() => controls.setIsFollowing(!controls.isFollowing)}
+                                    variant={controls.isFollowing ? "outline" : "default"}
                                 >
-                                    {isFollowing ? (
+                                    {controls.isFollowing ? (
                                         <>
                                             <Heart className="h-4 w-4 mr-2 fill-red-500 text-red-500" />
                                             Following
@@ -524,32 +606,32 @@ function LiveSession() {
                         <div className="grid grid-cols-4 gap-3">
                             <Button
                                 size="sm"
-                                variant={isHandRaised ? "default" : "outline"}
-                                onClick={() => setIsHandRaised(!isHandRaised)}
-                                className={`h-12 flex flex-col gap-1 ${isHandRaised ? 'bg-blue-600 hover:bg-blue-700' : ''}`}
-                                title={isHandRaised ? "Lower Hand" : "Raise Hand"}
+                                variant={controls.isHandRaised ? "default" : "outline"}
+                                onClick={() => controls.setIsHandRaised(!controls.isHandRaised)}
+                                className={`h-12 flex flex-col gap-1 ${controls.isHandRaised ? 'bg-blue-600 hover:bg-blue-700' : ''}`}
+                                title={controls.isHandRaised ? "Lower Hand" : "Raise Hand"}
                             >
                                 <Hand className="h-4 w-4" />
                                 <span className="text-xs">Hand</span>
                             </Button>
                             <Button
                                 size="sm"
-                                variant={isMicOn ? "default" : "outline"}
-                                onClick={() => setIsMicOn(!isMicOn)}
-                                className={`h-12 flex flex-col gap-1 ${isMicOn ? 'bg-green-600 hover:bg-green-700' : ''}`}
-                                title={isMicOn ? "Turn Off Mic" : "Turn On Mic"}
+                                variant={controls.isMicOn ? "default" : "outline"}
+                                onClick={() => controls.setIsMicOn(!controls.isMicOn)}
+                                className={`h-12 flex flex-col gap-1 ${controls.isMicOn ? 'bg-green-600 hover:bg-green-700' : ''}`}
+                                title={controls.isMicOn ? "Turn Off Mic" : "Turn On Mic"}
                             >
-                                {isMicOn ? <Mic className="h-4 w-4" /> : <MicOff className="h-4 w-4" />}
+                                {controls.isMicOn ? <Mic className="h-4 w-4" /> : <MicOff className="h-4 w-4" />}
                                 <span className="text-xs">Mic</span>
                             </Button>
                             <Button
                                 size="sm"
-                                variant={isVideoOn ? "default" : "outline"}
-                                onClick={() => setIsVideoOn(!isVideoOn)}
-                                className={`h-12 flex flex-col gap-1 ${isVideoOn ? 'bg-purple-600 hover:bg-purple-700' : ''}`}
-                                title={isVideoOn ? "Turn Off Camera" : "Turn On Camera"}
+                                variant={controls.isVideoOn ? "default" : "outline"}
+                                onClick={() => controls.setIsVideoOn(!controls.isVideoOn)}
+                                className={`h-12 flex flex-col gap-1 ${controls.isVideoOn ? 'bg-purple-600 hover:bg-purple-700' : ''}`}
+                                title={controls.isVideoOn ? "Turn Off Camera" : "Turn On Camera"}
                             >
-                                {isVideoOn ? <Video className="h-4 w-4" /> : <VideoOff className="h-4 w-4" />}
+                                {controls.isVideoOn ? <Video className="h-4 w-4" /> : <VideoOff className="h-4 w-4" />}
                                 <span className="text-xs">Video</span>
                             </Button>
                             <Button
@@ -565,19 +647,19 @@ function LiveSession() {
 
                         {/* Status Indicators */}
                         <div className="flex items-center justify-center gap-4 mt-3 text-xs text-gray-600">
-                            {isHandRaised && (
+                            {controls.isHandRaised && (
                                 <div className="flex items-center gap-1 text-blue-600">
                                     <Hand className="h-3 w-3" />
                                     <span>Hand Raised</span>
                                 </div>
                             )}
-                            {isMicOn && (
+                            {controls.isMicOn && (
                                 <div className="flex items-center gap-1 text-green-600">
                                     <Mic className="h-3 w-3" />
                                     <span>Mic On</span>
                                 </div>
                             )}
-                            {isVideoOn && (
+                            {controls.isVideoOn && (
                                 <div className="flex items-center gap-1 text-purple-600">
                                     <Video className="h-3 w-3" />
                                     <span>Video On</span>
@@ -688,9 +770,9 @@ function LiveSession() {
                                     <div className="flex items-center justify-between mt-2 text-xs text-gray-500">
                                         <span>Press Enter to send, Shift+Enter for new line</span>
                                         <div className="flex items-center gap-2">
-                                            <span className={`flex items-center gap-1 ${connectionStatus === 'connected' ? 'text-green-600' : 'text-red-600'}`}>
-                                                <div className={`w-2 h-2 rounded-full ${connectionStatus === 'connected' ? 'bg-green-500' : 'bg-red-500'}`}></div>
-                                                {connectionStatus === 'connected' ? 'Connected' : 'Disconnected'}
+                                            <span className={`flex items-center gap-1 ${controls.connectionStatus === 'connected' ? 'text-green-600' : 'text-red-600'}`}>
+                                                <div className={`w-2 h-2 rounded-full ${controls.connectionStatus === 'connected' ? 'bg-green-500' : 'bg-red-500'}`}></div>
+                                                {controls.connectionStatus === 'connected' ? 'Connected' : 'Disconnected'}
                                             </span>
                                         </div>
                                     </div>

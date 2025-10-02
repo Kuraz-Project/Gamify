@@ -12,6 +12,7 @@ import Profile from './Pages/Profile'
 import Wallet from './Pages/Wallet'
 import Leaderboards from './Pages/Leaderboards'
 import LiveSession from './Pages/LiveSessions'
+import MySessions from './Pages/MySessions'; 
 import Register from './Pages/Register'
 
 const AuthContext = createContext(null)
@@ -56,10 +57,10 @@ const router = createBrowserRouter(
     <Route path = "/" element = {<MainLayout />}>
       <Route index element={<Home />}/> 
       <Route path='explore' element={<Explore />}/>
-      {/* <Route path='leader' element={<Leaderboards />}/> */}
       <Route path='leaderboards' element={<Leaderboards />}/>
       <Route path='profile' element={<Profile />}/>
       <Route path='livesessions' element={<LiveSession />}/>
+      <Route path="/my-sessions" element={<MySessions />} />
       <Route path='wallet' element={<Wallet />}/>
       <Route path='create' element={<Create />}/>
       <Route path='register' element={<Register />}/>
