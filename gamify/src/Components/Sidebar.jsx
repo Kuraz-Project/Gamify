@@ -52,7 +52,7 @@ import {
 
     return (
         <aside
-        className={`sticky top-14 h-[calc(100vh-3.5rem)] ${
+        className={`flex flex-col justify-between sticky top-14 h-[calc(100vh-3.5rem)] ${
             isSlim ? 'w-16' : 'w-[300px]'
         } bg-gradient-to-b from-gray-100 to-gray-200 text-gray-900 shadow-lg px-2 py-6 transition-all duration-300 ease-in-out md:translate-x-0 border-r border-gray-300 ${
             isOpen ? 'translate-x-0' : '-translate-x-full'
@@ -109,10 +109,10 @@ import {
         </div>
 
         {/* Divider and Logout */}
-        <div className="mt-32 pt-6 border-t border-gray-300">
+        <div className="border-t border-gray-300">
             <button
             onClick={handleLogout}
-            className={`flex items-center gap-3 p-3 w-full rounded-lg transition-all duration-200 hover:bg-red-100 hover:text-red-700 text-gray-700 ${
+            className={`flex items-center gap-3 p-3 w-full rounded-lg transition-all duration-200 hover:bg-red-100 hover:text-red-700 hover:border hover:rounded-xl text-gray-700 ${
                 isSlim ? 'justify-center px-1' : ''
             }`}
             title={isSlim ? 'Logout' : ''}

@@ -3,6 +3,7 @@ import { useAuth } from '../App'
 import { FaTrophy, FaMedal, FaCrown, FaChartLine, FaStar, FaAward, FaBullseye, FaSearch, FaSort, FaShare, FaDownload, FaEye, FaUsers, FaClock, FaLongArrowAltUp, FaFilter } from 'react-icons/fa'
 import { Tooltip } from 'react-tooltip'
 import PropTypes from 'prop-types'
+import { useNavigate } from 'react-router-dom'
 
 // Consistent components from previous updates
 const Badge = ({ children, className = '', variant = 'default' }) => (
@@ -65,8 +66,13 @@ const rankIcon = (rank) => {
   return <span className="text-lg font-bold text-gray-500">#{rank}</span>
 }
 
+
 // Sub-components
 const UserCard = ({ user, type, index, viewMode = 'detailed' }) => {
+  const navigate = useNavigate()
+  const handleClick = () => {
+    navigate(`/ViewProfile/${user.id}`)
+  }
   if (viewMode === 'compact') {
     return (
       <Card className="hover:shadow-md">
@@ -79,7 +85,7 @@ const UserCard = ({ user, type, index, viewMode = 'detailed' }) => {
             <img
               src={user.avatar}
               alt={user.name}
-              className="w-10 h-10 rounded-full object-cover"
+              className="w-10 h-10 rounded-full object-cover cursor-pointer"
               loading="lazy"
               onError={(e) => (e.target.src = `https://ui-avatars.com/api/?name=${user.name[0]}`)}
             />
@@ -116,11 +122,12 @@ const UserCard = ({ user, type, index, viewMode = 'detailed' }) => {
   }
 
   return (
-    <Card className="hover:shadow-md">
-      <CardContent className="p-6">
+    <Card className="hover:shadow-md" >
+      <CardContent className="p-6" >
         <div
-          className="flex items-center gap-6"
+          className="flex items-center gap-6 cursor-pointer"
           data-tooltip-id={`tooltip-${type}-${user.id}`}
+          onClick={handleClick}
         >
           <div className="flex items-center justify-center w-14 h-14">{rankIcon(user.rank)}</div>
           <img

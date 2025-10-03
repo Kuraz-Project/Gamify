@@ -14,6 +14,7 @@ import Leaderboards from './Pages/Leaderboards'
 import LiveSession from './Pages/LiveSessions'
 import MySessions from './Pages/MySessions'; 
 import Register from './Pages/Register'
+import ViewProfile from './Pages/ViewProfile'
 
 const AuthContext = createContext(null)
 
@@ -65,6 +66,7 @@ const router = createBrowserRouter(
       <Route path='create' element={<Create />}/>
       <Route path='register' element={<Register />}/>
       <Route path='login' element={<Login />}/>
+      <Route path="viewProfile/:id" element={<ViewProfile />}/>
       <Route path="*" element={<Error />}/>
     </Route>
   )

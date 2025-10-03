@@ -212,22 +212,22 @@ const MySessions = () => {
 
       {/* Filters */}
       <div className="container mx-auto px-4 py-8 max-w-7xl">
-        <div className="flex flex-wrap gap-4 mb-6">
-          <div className="relative">
+        <div className="flex justify-between gap-4 mb-6">
+          <div className="relative flex-1">
             <FaSearch className="absolute left-3 top-3 text-gray-400" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search sessions..."
-              className="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 w-64"
+              className="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 w-full"
               aria-label="Search sessions"
             />
           </div>
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-gray-500"
+            className="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-gray-500 outline-none"
             aria-label="Filter by status"
           >
             <option value="all">All Status</option>
