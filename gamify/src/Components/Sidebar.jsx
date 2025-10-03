@@ -109,7 +109,7 @@ import {
         </div>
 
         {/* Divider and Logout */}
-        <div className="mt-auto pt-6 border-t border-gray-300">
+        <div className="mt-32 pt-6 border-t border-gray-300">
             <button
             onClick={handleLogout}
             className={`flex items-center gap-3 p-3 w-full rounded-lg transition-all duration-200 hover:bg-red-100 hover:text-red-700 text-gray-700 ${
