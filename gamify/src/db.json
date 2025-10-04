@@ -7,7 +7,7 @@
   },
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "alex_j",
       "email": "alex@example.com",
       "profile": {
@@ -19,18 +19,32 @@
         "status": "active"
       },
       "social": {
-        "followers": [2, 3, 5],
-        "following": [4, 6],
+        "followers": [
+          2,
+          3,
+          5
+        ],
+        "following": [
+          4,
+          6
+        ],
         "totalFollowers": 3,
         "totalFollowing": 2
       },
       "performance": {
-        "ratings": [4, 5, 5],
+        "ratings": [
+          4,
+          5,
+          5
+        ],
         "averageRating": 4.67,
         "totalRatings": 3
       },
       "achievements": {
-        "badges": ["Top Creator", "Early Adopter"],
+        "badges": [
+          "Top Creator",
+          "Early Adopter"
+        ],
         "points": 1200,
         "level": "Intermediate"
       },
@@ -58,14 +72,18 @@
             "views": 1100,
             "likes": 60,
             "createdAt": "2025-08-15T09:00:00Z",
-            "tags": ["sample", "video", "alex_j"],
+            "tags": [
+              "sample",
+              "video",
+              "alex_j"
+            ],
             "isPublished": true
           }
         ]
       }
     },
     {
-      "id": 2,
+      "id": "2",
       "username": "maria_k",
       "email": "maria@example.com",
       "profile": {
@@ -77,18 +95,30 @@
         "status": "active"
       },
       "social": {
-        "followers": [1, 3],
-        "following": [5, 6],
+        "followers": [
+          1,
+          3
+        ],
+        "following": [
+          5,
+          6
+        ],
         "totalFollowers": 2,
         "totalFollowing": 2
       },
       "performance": {
-        "ratings": [5, 4, 4],
+        "ratings": [
+          5,
+          4,
+          4
+        ],
         "averageRating": 4.33,
         "totalRatings": 3
       },
       "achievements": {
-        "badges": ["Community Helper"],
+        "badges": [
+          "Community Helper"
+        ],
         "points": 800,
         "level": "Beginner"
       },
@@ -116,14 +146,18 @@
             "views": 1200,
             "likes": 70,
             "createdAt": "2025-08-15T09:00:00Z",
-            "tags": ["sample", "article", "maria_k"],
+            "tags": [
+              "sample",
+              "article",
+              "maria_k"
+            ],
             "isPublished": true
           }
         ]
       }
     },
     {
-      "id": 3,
+      "id": "3",
       "username": "samuel_d",
       "email": "samuel@example.com",
       "profile": {
@@ -135,18 +169,31 @@
         "status": "active"
       },
       "social": {
-        "followers": [1, 2, 5],
-        "following": [4, 7],
+        "followers": [
+          1,
+          2,
+          5
+        ],
+        "following": [
+          4,
+          7
+        ],
         "totalFollowers": 3,
         "totalFollowing": 2
       },
       "performance": {
-        "ratings": [5, 5, 4],
+        "ratings": [
+          5,
+          5,
+          4
+        ],
         "averageRating": 4.67,
         "totalRatings": 3
       },
       "achievements": {
-        "badges": ["AI Explorer"],
+        "badges": [
+          "AI Explorer"
+        ],
         "points": 900,
         "level": "Beginner"
       },
@@ -174,14 +221,18 @@
             "views": 1300,
             "likes": 80,
             "createdAt": "2025-08-15T09:00:00Z",
-            "tags": ["sample", "article", "samuel_d"],
+            "tags": [
+              "sample",
+              "article",
+              "samuel_d"
+            ],
             "isPublished": true
           }
         ]
       }
     },
     {
-      "id": 4,
+      "id": "4",
       "username": "li_chen",
       "email": "li@example.com",
       "profile": {
@@ -193,18 +244,30 @@
         "status": "active"
       },
       "social": {
-        "followers": [1, 3],
-        "following": [8, 9],
+        "followers": [
+          1,
+          3
+        ],
+        "following": [
+          8,
+          9
+        ],
         "totalFollowers": 2,
         "totalFollowing": 2
       },
       "performance": {
-        "ratings": [4, 4, 5],
+        "ratings": [
+          4,
+          4,
+          5
+        ],
         "averageRating": 4.33,
         "totalRatings": 3
       },
       "achievements": {
-        "badges": ["Code Mentor"],
+        "badges": [
+          "Code Mentor"
+        ],
         "points": 1100,
         "level": "Intermediate"
       },
@@ -232,14 +295,18 @@
             "views": 1400,
             "likes": 90,
             "createdAt": "2025-08-15T09:00:00Z",
-            "tags": ["sample", "video", "li_chen"],
+            "tags": [
+              "sample",
+              "video",
+              "li_chen"
+            ],
             "isPublished": true
           }
         ]
       }
     },
     {
-      "id": 5,
+      "id": "5",
       "username": "nina_p",
       "email": "nina@example.com",
       "profile": {
@@ -251,18 +318,30 @@
         "status": "active"
       },
       "social": {
-        "followers": [2, 3],
-        "following": [1, 6],
+        "followers": [
+          2,
+          3
+        ],
+        "following": [
+          1,
+          6
+        ],
         "totalFollowers": 2,
         "totalFollowing": 2
       },
       "performance": {
-        "ratings": [5, 5, 5],
-        "averageRating": 5.0,
+        "ratings": [
+          5,
+          5,
+          5
+        ],
+        "averageRating": 5,
         "totalRatings": 3
       },
       "achievements": {
-        "badges": ["Rising Star"],
+        "badges": [
+          "Rising Star"
+        ],
         "points": 1500,
         "level": "Intermediate"
       },
@@ -290,14 +369,18 @@
             "views": 1500,
             "likes": 100,
             "createdAt": "2025-08-15T09:00:00Z",
-            "tags": ["sample", "podcast", "nina_p"],
+            "tags": [
+              "sample",
+              "podcast",
+              "nina_p"
+            ],
             "isPublished": true
           }
         ]
       }
     },
     {
-      "id": 6,
+      "id": "6",
       "username": "omar_h",
       "email": "omar@example.com",
       "profile": {
@@ -309,18 +392,31 @@
         "status": "active"
       },
       "social": {
-        "followers": [1, 2, 5],
-        "following": [7, 10],
+        "followers": [
+          1,
+          2,
+          5
+        ],
+        "following": [
+          7,
+          10
+        ],
         "totalFollowers": 3,
         "totalFollowing": 2
       },
       "performance": {
-        "ratings": [4, 5, 5],
+        "ratings": [
+          4,
+          5,
+          5
+        ],
         "averageRating": 4.67,
         "totalRatings": 3
       },
       "achievements": {
-        "badges": ["Game Maker"],
+        "badges": [
+          "Game Maker"
+        ],
         "points": 1300,
         "level": "Intermediate"
       },
@@ -348,14 +444,18 @@
             "views": 1600,
             "likes": 110,
             "createdAt": "2025-08-15T09:00:00Z",
-            "tags": ["sample", "video", "omar_h"],
+            "tags": [
+              "sample",
+              "video",
+              "omar_h"
+            ],
             "isPublished": true
           }
         ]
       }
     },
     {
-      "id": 7,
+      "id": "7",
       "username": "sofia_r",
       "email": "sofia@example.com",
       "profile": {
@@ -367,18 +467,30 @@
         "status": "active"
       },
       "social": {
-        "followers": [3, 6],
-        "following": [8, 9],
+        "followers": [
+          3,
+          6
+        ],
+        "following": [
+          8,
+          9
+        ],
         "totalFollowers": 2,
         "totalFollowing": 2
       },
       "performance": {
-        "ratings": [5, 4, 5],
+        "ratings": [
+          5,
+          4,
+          5
+        ],
         "averageRating": 4.67,
         "totalRatings": 3
       },
       "achievements": {
-        "badges": ["Math Wizard"],
+        "badges": [
+          "Math Wizard"
+        ],
         "points": 1400,
         "level": "Intermediate"
       },
@@ -406,14 +518,18 @@
             "views": 1700,
             "likes": 120,
             "createdAt": "2025-08-15T09:00:00Z",
-            "tags": ["sample", "article", "sofia_r"],
+            "tags": [
+              "sample",
+              "article",
+              "sofia_r"
+            ],
             "isPublished": true
           }
         ]
       }
     },
     {
-      "id": 8,
+      "id": "8",
       "username": "diego_m",
       "email": "diego@example.com",
       "profile": {
@@ -425,18 +541,30 @@
         "status": "active"
       },
       "social": {
-        "followers": [4, 7],
-        "following": [9, 10],
+        "followers": [
+          4,
+          7
+        ],
+        "following": [
+          9,
+          10
+        ],
         "totalFollowers": 2,
         "totalFollowing": 2
       },
       "performance": {
-        "ratings": [5, 4, 4],
+        "ratings": [
+          5,
+          4,
+          4
+        ],
         "averageRating": 4.33,
         "totalRatings": 3
       },
       "achievements": {
-        "badges": ["Globetrotter"],
+        "badges": [
+          "Globetrotter"
+        ],
         "points": 1600,
         "level": "Intermediate"
       },
@@ -464,14 +592,18 @@
             "views": 1800,
             "likes": 130,
             "createdAt": "2025-08-15T09:00:00Z",
-            "tags": ["sample", "blog", "diego_m"],
+            "tags": [
+              "sample",
+              "blog",
+              "diego_m"
+            ],
             "isPublished": true
           }
         ]
       }
     },
     {
-      "id": 9,
+      "id": "9",
       "username": "amelia_w",
       "email": "amelia@example.com",
       "profile": {
@@ -483,18 +615,31 @@
         "status": "active"
       },
       "social": {
-        "followers": [4, 7, 8],
-        "following": [10, 11],
+        "followers": [
+          4,
+          7,
+          8
+        ],
+        "following": [
+          10,
+          11
+        ],
         "totalFollowers": 3,
         "totalFollowing": 2
       },
       "performance": {
-        "ratings": [5, 5, 4],
+        "ratings": [
+          5,
+          5,
+          4
+        ],
         "averageRating": 4.67,
         "totalRatings": 3
       },
       "achievements": {
-        "badges": ["Hitmaker"],
+        "badges": [
+          "Hitmaker"
+        ],
         "points": 1700,
         "level": "Intermediate"
       },
@@ -522,14 +667,18 @@
             "views": 1900,
             "likes": 140,
             "createdAt": "2025-08-15T09:00:00Z",
-            "tags": ["sample", "audio", "amelia_w"],
+            "tags": [
+              "sample",
+              "audio",
+              "amelia_w"
+            ],
             "isPublished": true
           }
         ]
       }
     },
     {
-      "id": 10,
+      "id": "10",
       "username": "raj_k",
       "email": "raj@example.com",
       "profile": {
@@ -541,18 +690,31 @@
         "status": "active"
       },
       "social": {
-        "followers": [6, 8, 9],
-        "following": [11, 12],
+        "followers": [
+          6,
+          8,
+          9
+        ],
+        "following": [
+          11,
+          12
+        ],
         "totalFollowers": 3,
         "totalFollowing": 2
       },
       "performance": {
-        "ratings": [4, 5, 5],
+        "ratings": [
+          4,
+          5,
+          5
+        ],
         "averageRating": 4.67,
         "totalRatings": 3
       },
       "achievements": {
-        "badges": ["ML Enthusiast"],
+        "badges": [
+          "ML Enthusiast"
+        ],
         "points": 1800,
         "level": "Intermediate"
       },
@@ -580,14 +742,18 @@
             "views": 2000,
             "likes": 150,
             "createdAt": "2025-08-15T09:00:00Z",
-            "tags": ["sample", "video", "raj_k"],
+            "tags": [
+              "sample",
+              "video",
+              "raj_k"
+            ],
             "isPublished": true
           }
         ]
       }
     },
     {
-      "id": 11,
+      "id": "11",
       "username": "emma_l",
       "email": "emma@example.com",
       "profile": {
@@ -599,18 +765,30 @@
         "status": "active"
       },
       "social": {
-        "followers": [9, 10],
-        "following": [12, 13],
+        "followers": [
+          9,
+          10
+        ],
+        "following": [
+          12,
+          13
+        ],
         "totalFollowers": 2,
         "totalFollowing": 2
       },
       "performance": {
-        "ratings": [5, 5, 4],
+        "ratings": [
+          5,
+          5,
+          4
+        ],
         "averageRating": 4.67,
         "totalRatings": 3
       },
       "achievements": {
-        "badges": ["Storyteller"],
+        "badges": [
+          "Storyteller"
+        ],
         "points": 950,
         "level": "Beginner"
       },
@@ -638,14 +816,18 @@
             "views": 2100,
             "likes": 160,
             "createdAt": "2025-08-20T09:00:00Z",
-            "tags": ["sample", "article", "emma_l"],
+            "tags": [
+              "sample",
+              "article",
+              "emma_l"
+            ],
             "isPublished": true
           }
         ]
       }
     },
     {
-      "id": 12,
+      "id": "12",
       "username": "sarah_c",
       "email": "sarah@example.com",
       "profile": {
@@ -657,18 +839,30 @@
         "status": "active"
       },
       "social": {
-        "followers": [10, 11],
-        "following": [13, 14],
+        "followers": [
+          10,
+          11
+        ],
+        "following": [
+          13,
+          14
+        ],
         "totalFollowers": 2,
         "totalFollowing": 2
       },
       "performance": {
-        "ratings": [5, 4, 5],
+        "ratings": [
+          5,
+          4,
+          5
+        ],
         "averageRating": 4.67,
         "totalRatings": 3
       },
       "achievements": {
-        "badges": ["Health Innovator"],
+        "badges": [
+          "Health Innovator"
+        ],
         "points": 2000,
         "level": "Advanced"
       },
@@ -696,14 +890,18 @@
             "views": 2200,
             "likes": 170,
             "createdAt": "2025-08-20T09:00:00Z",
-            "tags": ["sample", "video", "sarah_c"],
+            "tags": [
+              "sample",
+              "video",
+              "sarah_c"
+            ],
             "isPublished": true
           }
         ]
       }
     },
     {
-      "id": 13,
+      "id": "13",
       "username": "michael_t",
       "email": "michael@example.com",
       "profile": {
@@ -715,18 +913,30 @@
         "status": "active"
       },
       "social": {
-        "followers": [11, 12],
-        "following": [14, 15],
+        "followers": [
+          11,
+          12
+        ],
+        "following": [
+          14,
+          15
+        ],
         "totalFollowers": 2,
         "totalFollowing": 2
       },
       "performance": {
-        "ratings": [4, 5, 5],
+        "ratings": [
+          4,
+          5,
+          5
+        ],
         "averageRating": 4.67,
         "totalRatings": 3
       },
       "achievements": {
-        "badges": ["Entrepreneur"],
+        "badges": [
+          "Entrepreneur"
+        ],
         "points": 1900,
         "level": "Advanced"
       },
@@ -754,14 +964,18 @@
             "views": 2300,
             "likes": 180,
             "createdAt": "2025-08-20T09:00:00Z",
-            "tags": ["sample", "video", "michael_t"],
+            "tags": [
+              "sample",
+              "video",
+              "michael_t"
+            ],
             "isPublished": true
           }
         ]
       }
     },
     {
-      "id": 14,
+      "id": "14",
       "username": "alex_k",
       "email": "alexk@example.com",
       "profile": {
@@ -773,18 +987,30 @@
         "status": "active"
       },
       "social": {
-        "followers": [12, 13],
-        "following": [15, 16],
+        "followers": [
+          12,
+          13
+        ],
+        "following": [
+          15,
+          16
+        ],
         "totalFollowers": 2,
         "totalFollowing": 2
       },
       "performance": {
-        "ratings": [4, 4, 5],
+        "ratings": [
+          4,
+          4,
+          5
+        ],
         "averageRating": 4.33,
         "totalRatings": 3
       },
       "achievements": {
-        "badges": ["Crypto Guru"],
+        "badges": [
+          "Crypto Guru"
+        ],
         "points": 1700,
         "level": "Intermediate"
       },
@@ -812,14 +1038,18 @@
             "views": 2400,
             "likes": 190,
             "createdAt": "2025-08-20T09:00:00Z",
-            "tags": ["sample", "video", "alex_k"],
+            "tags": [
+              "sample",
+              "video",
+              "alex_k"
+            ],
             "isPublished": true
           }
         ]
       }
     },
     {
-      "id": 15,
+      "id": "15",
       "username": "jessica_p",
       "email": "jessica@example.com",
       "profile": {
@@ -831,18 +1061,30 @@
         "status": "active"
       },
       "social": {
-        "followers": [13, 14],
-        "following": [16, 17],
+        "followers": [
+          13,
+          14
+        ],
+        "following": [
+          16,
+          17
+        ],
         "totalFollowers": 2,
         "totalFollowing": 2
       },
       "performance": {
-        "ratings": [5, 4, 5],
+        "ratings": [
+          5,
+          4,
+          5
+        ],
         "averageRating": 4.67,
         "totalRatings": 3
       },
       "achievements": {
-        "badges": ["Marketing Pro"],
+        "badges": [
+          "Marketing Pro"
+        ],
         "points": 1600,
         "level": "Intermediate"
       },
@@ -870,14 +1112,18 @@
             "views": 2500,
             "likes": 200,
             "createdAt": "2025-08-20T09:00:00Z",
-            "tags": ["sample", "video", "jessica_p"],
+            "tags": [
+              "sample",
+              "video",
+              "jessica_p"
+            ],
             "isPublished": true
           }
         ]
       }
     },
     {
-      "id": 16,
+      "id": "16",
       "username": "david_s",
       "email": "david@example.com",
       "profile": {
@@ -889,18 +1135,30 @@
         "status": "active"
       },
       "social": {
-        "followers": [14, 15],
-        "following": [17, 18],
+        "followers": [
+          14,
+          15
+        ],
+        "following": [
+          17,
+          18
+        ],
         "totalFollowers": 2,
         "totalFollowing": 2
       },
       "performance": {
-        "ratings": [5, 5, 5],
-        "averageRating": 5.0,
+        "ratings": [
+          5,
+          5,
+          5
+        ],
+        "averageRating": 5,
         "totalRatings": 3
       },
       "achievements": {
-        "badges": ["React Master"],
+        "badges": [
+          "React Master"
+        ],
         "points": 2100,
         "level": "Advanced"
       },
@@ -928,14 +1186,18 @@
             "views": 2600,
             "likes": 210,
             "createdAt": "2025-08-20T09:00:00Z",
-            "tags": ["sample", "video", "david_s"],
+            "tags": [
+              "sample",
+              "video",
+              "david_s"
+            ],
             "isPublished": true
           }
         ]
       }
     },
     {
-      "id": 17,
+      "id": "17",
       "username": "lisa_b",
       "email": "lisa@example.com",
       "profile": {
@@ -947,18 +1209,30 @@
         "status": "active"
       },
       "social": {
-        "followers": [15, 16],
-        "following": [18, 19],
+        "followers": [
+          15,
+          16
+        ],
+        "following": [
+          18,
+          19
+        ],
         "totalFollowers": 2,
         "totalFollowing": 2
       },
       "performance": {
-        "ratings": [4, 5, 4],
+        "ratings": [
+          4,
+          5,
+          4
+        ],
         "averageRating": 4.33,
         "totalRatings": 3
       },
       "achievements": {
-        "badges": ["Fitness Guru"],
+        "badges": [
+          "Fitness Guru"
+        ],
         "points": 1200,
         "level": "Intermediate"
       },
@@ -986,14 +1260,18 @@
             "views": 2700,
             "likes": 220,
             "createdAt": "2025-08-20T09:00:00Z",
-            "tags": ["sample", "video", "lisa_b"],
+            "tags": [
+              "sample",
+              "video",
+              "lisa_b"
+            ],
             "isPublished": true
           }
         ]
       }
     },
     {
-      "id": 18,
+      "id": "18",
       "username": "jake_m",
       "email": "jake@example.com",
       "profile": {
@@ -1005,18 +1283,30 @@
         "status": "active"
       },
       "social": {
-        "followers": [16, 17],
-        "following": [19, 20],
+        "followers": [
+          16,
+          17
+        ],
+        "following": [
+          19,
+          20
+        ],
         "totalFollowers": 2,
         "totalFollowing": 2
       },
       "performance": {
-        "ratings": [5, 4, 5],
+        "ratings": [
+          5,
+          4,
+          5
+        ],
         "averageRating": 4.67,
         "totalRatings": 3
       },
       "achievements": {
-        "badges": ["Cyber Guardian"],
+        "badges": [
+          "Cyber Guardian"
+        ],
         "points": 1300,
         "level": "Intermediate"
       },
@@ -1044,14 +1334,18 @@
             "views": 2800,
             "likes": 230,
             "createdAt": "2025-08-20T09:00:00Z",
-            "tags": ["sample", "video", "jake_m"],
+            "tags": [
+              "sample",
+              "video",
+              "jake_m"
+            ],
             "isPublished": true
           }
         ]
       }
     },
     {
-      "id": 19,
+      "id": "19",
       "username": "olivia_n",
       "email": "olivia@example.com",
       "profile": {
@@ -1063,18 +1357,30 @@
         "status": "active"
       },
       "social": {
-        "followers": [17, 18],
-        "following": [20, 1],
+        "followers": [
+          17,
+          18
+        ],
+        "following": [
+          20,
+          1
+        ],
         "totalFollowers": 2,
         "totalFollowing": 2
       },
       "performance": {
-        "ratings": [4, 5, 4],
+        "ratings": [
+          4,
+          5,
+          4
+        ],
         "averageRating": 4.33,
         "totalRatings": 3
       },
       "achievements": {
-        "badges": ["Shutterbug"],
+        "badges": [
+          "Shutterbug"
+        ],
         "points": 1400,
         "level": "Intermediate"
       },
@@ -1102,14 +1408,18 @@
             "views": 2900,
             "likes": 240,
             "createdAt": "2025-08-20T09:00:00Z",
-            "tags": ["sample", "article", "olivia_n"],
+            "tags": [
+              "sample",
+              "article",
+              "olivia_n"
+            ],
             "isPublished": true
           }
         ]
       }
     },
     {
-      "id": 20,
+      "id": "20",
       "username": "ethan_w",
       "email": "ethan@example.com",
       "profile": {
@@ -1121,18 +1431,30 @@
         "status": "active"
       },
       "social": {
-        "followers": [18, 19],
-        "following": [1, 2],
+        "followers": [
+          18,
+          19
+        ],
+        "following": [
+          1,
+          2
+        ],
         "totalFollowers": 2,
         "totalFollowing": 2
       },
       "performance": {
-        "ratings": [5, 5, 5],
-        "averageRating": 5.0,
+        "ratings": [
+          5,
+          5,
+          5
+        ],
+        "averageRating": 5,
         "totalRatings": 3
       },
       "achievements": {
-        "badges": ["Blockchain Pioneer"],
+        "badges": [
+          "Blockchain Pioneer"
+        ],
         "points": 2200,
         "level": "Advanced"
       },
@@ -1160,7 +1482,11 @@
             "views": 3000,
             "likes": 250,
             "createdAt": "2025-08-20T09:00:00Z",
-            "tags": ["sample", "video", "ethan_w"],
+            "tags": [
+              "sample",
+              "video",
+              "ethan_w"
+            ],
             "isPublished": true
           }
         ]
@@ -1169,7 +1495,7 @@
   ],
   "sessions": [
     {
-      "id": 1,
+      "id": "1",
       "title": "AI in Healthcare: Future Trends and Applications",
       "creator": "sarah_c",
       "avatar": "https://i.pravatar.cc/150?img=12",
@@ -1188,7 +1514,7 @@
       "live": false
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Startup Fundraising Masterclass",
       "creator": "michael_t",
       "avatar": "https://i.pravatar.cc/150?img=13",
@@ -1207,7 +1533,7 @@
       "live": false
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Creative Writing Workshop: Character Development",
       "creator": "emma_l",
       "avatar": "https://i.pravatar.cc/150?img=11",
@@ -1226,7 +1552,7 @@
       "live": false
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "Cryptocurrency Investment Strategies - LIVE",
       "creator": "alex_k",
       "avatar": "https://i.pravatar.cc/150?img=14",
@@ -1245,7 +1571,7 @@
       "live": true
     },
     {
-      "id": 5,
+      "id": "5",
       "title": "Digital Marketing in 2025: Latest Trends",
       "creator": "jessica_p",
       "avatar": "https://i.pravatar.cc/150?img=15",
@@ -1264,7 +1590,7 @@
       "live": false
     },
     {
-      "id": 6,
+      "id": "6",
       "title": "React Performance Optimization",
       "creator": "david_s",
       "avatar": "https://i.pravatar.cc/150?img=16",
@@ -1390,10 +1716,18 @@
         "category": "Technology",
         "subcategory": "Web Development",
         "description": "Deep dive into React performance optimization techniques including code splitting, memoization, virtualization, and bundle analysis. Learn how to build lightning-fast React applications.",
-        "tags": ["React", "Performance", "JavaScript", "Web Development"],
+        "tags": [
+          "React",
+          "Performance",
+          "JavaScript",
+          "Web Development"
+        ],
         "language": "en",
         "level": "Advanced",
-        "prerequisites": ["Intermediate React knowledge", "JavaScript ES6+"]
+        "prerequisites": [
+          "Intermediate React knowledge",
+          "JavaScript ES6+"
+        ]
       },
       "interaction": {
         "chatEnabled": true,
@@ -1508,6 +1842,78 @@
       }
     }
   },
+  "bookings": [
+    {
+      "id": "1",
+      "userId": 1,
+      "sessionId": 1,
+      "bookedAt": "2025-10-01T10:00:00Z",
+      "status": "confirmed"
+    },
+    {
+      "id": "2",
+      "userId": 1,
+      "sessionId": 4,
+      "bookedAt": "2025-09-24T13:00:00Z",
+      "status": "confirmed"
+    },
+    {
+      "id": "3",
+      "userId": 1,
+      "sessionId": 3,
+      "bookedAt": "2025-10-02T09:00:00Z",
+      "status": "confirmed"
+    },
+    {
+      "id": 1759586752711,
+      "userId": 1759511156458,
+      "sessionId": "4",
+      "bookedAt": "2025-10-04T14:05:52.711Z",
+      "status": "confirmed"
+    },
+    {
+      "id": 1759586762109,
+      "userId": 1759511156458,
+      "sessionId": "4",
+      "bookedAt": "2025-10-04T14:06:02.109Z",
+      "status": "confirmed"
+    },
+    {
+      "id": 1759587088920,
+      "userId": 1759587076816,
+      "sessionId": "5",
+      "bookedAt": "2025-10-04T14:11:28.920Z",
+      "status": "confirmed"
+    },
+    {
+      "id": 1759587095532,
+      "userId": 1759587076816,
+      "sessionId": "3",
+      "bookedAt": "2025-10-04T14:11:35.532Z",
+      "status": "confirmed"
+    },
+    {
+      "id": 1759587587100,
+      "userId": 1759587076816,
+      "sessionId": "5",
+      "bookedAt": "2025-10-04T14:19:47.100Z",
+      "status": "confirmed"
+    },
+    {
+      "id": 1759587590618,
+      "userId": 1759587076816,
+      "sessionId": "3",
+      "bookedAt": "2025-10-04T14:19:50.618Z",
+      "status": "confirmed"
+    },
+    {
+      "id": 1759588146754,
+      "userId": 1759587676449,
+      "sessionId": "5",
+      "bookedAt": "2025-10-04T14:29:06.754Z",
+      "status": "confirmed"
+    }
+  ],
   "validation": {
     "errors": [],
     "warnings": [],

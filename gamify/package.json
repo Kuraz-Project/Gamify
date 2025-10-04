@@ -7,20 +7,24 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "json-server --watch gamify/src/db.json --port 3000"
   },
   "dependencies": {
+    "@babel/core": "^7.28.4",
+    "@babel/parser": "^7.28.4",
     "@tailwindcss/vite": "^4.1.13",
     "formik": "^2.4.6",
     "framer-motion": "^12.23.21",
     "json-server": "^1.0.0-beta.3",
     "lucide-react": "^0.544.0",
     "prop-types": "^15.8.1",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "react-hot-toast": "^2.6.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "6.14",
+    "react-scripts": "^5.0.1",
     "react-tooltip": "^5.29.1",
     "tailwindcss": "^4.1.13",
     "yup": "^1.7.0"
