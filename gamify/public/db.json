@@ -10,56 +10,45 @@
       "id": 1,
       "username": "alex_j",
       "email": "alex@example.com",
-      "profile": {
-        "bio": "Tech enthusiast and live coding streamer.",
-        "avatar": "https://i.pravatar.cc/150?img=1",
-        "fallbackAvatar": "https://ui-avatars.com/api/?name=alex+j",
-        "joinDate": "2024-01-15T10:30:00Z",
-        "isVerified": true,
-        "status": "active"
-      },
-      "social": {
-        "followers": [2, 3, 5],
-        "following": [4, 6],
-        "totalFollowers": 3,
-        "totalFollowing": 2
-      },
-      "performance": {
-        "ratings": [4, 5, 5],
-        "averageRating": 4.67,
-        "totalRatings": 3
-      },
-      "achievements": {
-        "badges": ["Top Creator", "Early Adopter"],
-        "points": 1200,
-        "level": "Intermediate"
-      },
-      "content": {
-        "schedule": [
+      "sessions": {
+        "learner": [
           {
-            "id": "sched-1",
-            "date": "2025-09-25T14:00:00Z",
-            "topic": "React Basics",
+            "id": "1",
+            "title": "AI in Healthcare: Future Trends and Applications",
+            "description": "Explore how AI is revolutionizing healthcare with real-world examples and future predictions.",
+            "thumbnail": "https://images.unsplash.com/photo-1585404544089-b386c0723dd4?q=80&w=1080&auto=format&fit=crop",
+            "date": "2025-10-06",
             "duration": 60,
-            "maxAttendees": 100,
-            "currentAttendees": 20,
-            "status": "scheduled"
+            "status": "upcoming",
+            "attendees": 156,
+            "rating": 4.9,
+            "tags": ["AI", "Healthcare", "Technology"]
+          },
+          {
+            "id": "4",
+            "title": "Cryptocurrency Investment Strategies - LIVE",
+            "description": "Live Q&A about current crypto market trends and investment strategies.",
+            "thumbnail": "https://images.unsplash.com/photo-1608986596619-eb50cc56831f?q=80&w=1080&auto=format&fit=crop",
+            "date": "2025-09-24",
+            "duration": 45,
+            "status": "live",
+            "attendees": 1200,
+            "rating": 4.7,
+            "tags": ["Crypto", "Finance", "Investment"]
           }
         ],
-        "creations": [
+        "creator": [
           {
-            "id": 1,
-            "title": "Intro to React",
-            "type": "video",
-            "url": "/content/video-1",
-            "thumbnail": "/thumbnails/video-1.jpg",
-            "duration": 1200,
-            "readTime": null,
-            "views": 1100,
-            "likes": 60,
-            "createdAt": "2025-08-15T09:00:00Z",
-            "tags": ["sample", "video", "alex_j"],
-            "isPublished": true
+            "id": "1",
+            "title": "React Basics Workshop",
+            "description": "Learn the fundamentals of React development.",
+            "thumbnail": "https://images.unsplash.com/photo-1587279825909-6725a8a82e4e?q=80&w=1080&auto=format&fit=crop",
+            "date": "2025-09-25",
+            "duration": 60,
+            "status": "upcoming",
+            "attendees": 20,
+            "rating": 4.8,
+            "tags": ["React", "JavaScript", "Web Development"]
           }
         ]
       }
@@ -68,810 +57,55 @@
       "id": 2,
       "username": "maria_k",
       "email": "maria@example.com",
-      "profile": {
-        "bio": "Designer sharing tips on UX/UI.",
-        "avatar": "https://i.pravatar.cc/150?img=2",
-        "fallbackAvatar": "https://ui-avatars.com/api/?name=maria+k",
-        "joinDate": "2024-01-15T10:30:00Z",
-        "isVerified": false,
-        "status": "active"
-      },
-      "social": {
-        "followers": [1, 3],
-        "following": [5, 6],
-        "totalFollowers": 2,
-        "totalFollowing": 2
-      },
-      "performance": {
-        "ratings": [5, 4, 4],
-        "averageRating": 4.33,
-        "totalRatings": 3
-      },
-      "achievements": {
-        "badges": ["Community Helper"],
-        "points": 800,
-        "level": "Beginner"
-      },
-      "content": {
-        "schedule": [
+      "sessions": {
+        "learner": [
           {
-            "id": "sched-2",
-            "date": "2025-09-26T14:00:00Z",
-            "topic": "UX Research",
-            "duration": 60,
-            "maxAttendees": 100,
-            "currentAttendees": 20,
-            "status": "scheduled"
+            "id": "2",
+            "title": "Startup Fundraising Masterclass",
+            "description": "Learn proven strategies for raising capital from a successful serial entrepreneur.",
+            "thumbnail": "https://images.unsplash.com/photo-1555069855-e580a9adbf43?q=80&w=1080&auto=format&fit=crop",
+            "date": "2025-10-07",
+            "duration": 90,
+            "status": "upcoming",
+            "attendees": 243,
+            "rating": 4.8,
+            "tags": ["Startup", "Business", "Fundraising"]
           }
         ],
-        "creations": [
-          {
-            "id": 2,
-            "title": "Color Theory in Design",
-            "type": "article",
-            "url": "/content/article-2",
-            "thumbnail": "/thumbnails/article-2.jpg",
-            "duration": null,
-            "readTime": 8,
-            "views": 1200,
-            "likes": 70,
-            "createdAt": "2025-08-15T09:00:00Z",
-            "tags": ["sample", "article", "maria_k"],
-            "isPublished": true
-          }
-        ]
-      }
-    },
-    {
-      "id": 3,
-      "username": "samuel_d",
-      "email": "samuel@example.com",
-      "profile": {
-        "bio": "CS student exploring AI and Web Dev.",
-        "avatar": "https://i.pravatar.cc/150?img=3",
-        "fallbackAvatar": "https://ui-avatars.com/api/?name=samuel+d",
-        "joinDate": "2024-01-15T10:30:00Z",
-        "isVerified": true,
-        "status": "active"
-      },
-      "social": {
-        "followers": [1, 2, 5],
-        "following": [4, 7],
-        "totalFollowers": 3,
-        "totalFollowing": 2
-      },
-      "performance": {
-        "ratings": [5, 5, 4],
-        "averageRating": 4.67,
-        "totalRatings": 3
-      },
-      "achievements": {
-        "badges": ["AI Explorer"],
-        "points": 900,
-        "level": "Beginner"
-      },
-      "content": {
-        "schedule": [
-          {
-            "id": "sched-3",
-            "date": "2025-09-27T14:00:00Z",
-            "topic": "Intro to AI",
-            "duration": 60,
-            "maxAttendees": 100,
-            "currentAttendees": 20,
-            "status": "scheduled"
-          }
-        ],
-        "creations": [
-          {
-            "id": 3,
-            "title": "Markov Chains Explained",
-            "type": "article",
-            "url": "/content/article-3",
-            "thumbnail": "/thumbnails/article-3.jpg",
-            "duration": null,
-            "readTime": 8,
-            "views": 1300,
-            "likes": 80,
-            "createdAt": "2025-08-15T09:00:00Z",
-            "tags": ["sample", "article", "samuel_d"],
-            "isPublished": true
-          }
-        ]
-      }
-    },
-    {
-      "id": 4,
-      "username": "li_chen",
-      "email": "li@example.com",
-      "profile": {
-        "bio": "Full-stack developer, coffee lover.",
-        "avatar": "https://i.pravatar.cc/150?img=4",
-        "fallbackAvatar": "https://ui-avatars.com/api/?name=li+chen",
-        "joinDate": "2024-01-15T10:30:00Z",
-        "isVerified": false,
-        "status": "active"
-      },
-      "social": {
-        "followers": [1, 3],
-        "following": [8, 9],
-        "totalFollowers": 2,
-        "totalFollowing": 2
-      },
-      "performance": {
-        "ratings": [4, 4, 5],
-        "averageRating": 4.33,
-        "totalRatings": 3
-      },
-      "achievements": {
-        "badges": ["Code Mentor"],
-        "points": 1100,
-        "level": "Intermediate"
-      },
-      "content": {
-        "schedule": [
-          {
-            "id": "sched-4",
-            "date": "2025-09-28T14:00:00Z",
-            "topic": "Django Basics",
-            "duration": 60,
-            "maxAttendees": 100,
-            "currentAttendees": 20,
-            "status": "scheduled"
-          }
-        ],
-        "creations": [
-          {
-            "id": 4,
-            "title": "Flask vs Django",
-            "type": "video",
-            "url": "/content/video-4",
-            "thumbnail": "/thumbnails/video-4.jpg",
-            "duration": 1200,
-            "readTime": null,
-            "views": 1400,
-            "likes": 90,
-            "createdAt": "2025-08-15T09:00:00Z",
-            "tags": ["sample", "video", "li_chen"],
-            "isPublished": true
-          }
-        ]
-      }
-    },
-    {
-      "id": 5,
-      "username": "nina_p",
-      "email": "nina@example.com",
-      "profile": {
-        "bio": "Podcaster on startup journeys.",
-        "avatar": "https://i.pravatar.cc/150?img=5",
-        "fallbackAvatar": "https://ui-avatars.com/api/?name=nina+p",
-        "joinDate": "2024-01-15T10:30:00Z",
-        "isVerified": true,
-        "status": "active"
-      },
-      "social": {
-        "followers": [2, 3],
-        "following": [1, 6],
-        "totalFollowers": 2,
-        "totalFollowing": 2
-      },
-      "performance": {
-        "ratings": [5, 5, 5],
-        "averageRating": 5.0,
-        "totalRatings": 3
-      },
-      "achievements": {
-        "badges": ["Rising Star"],
-        "points": 1500,
-        "level": "Intermediate"
-      },
-      "content": {
-        "schedule": [
-          {
-            "id": "sched-5",
-            "date": "2025-09-29T14:00:00Z",
-            "topic": "Founders Talk",
-            "duration": 60,
-            "maxAttendees": 100,
-            "currentAttendees": 20,
-            "status": "scheduled"
-          }
-        ],
-        "creations": [
-          {
-            "id": 5,
-            "title": "Startup Culture",
-            "type": "podcast",
-            "url": "/content/podcast-5",
-            "thumbnail": "/thumbnails/podcast-5.jpg",
-            "duration": null,
-            "readTime": null,
-            "views": 1500,
-            "likes": 100,
-            "createdAt": "2025-08-15T09:00:00Z",
-            "tags": ["sample", "podcast", "nina_p"],
-            "isPublished": true
-          }
-        ]
-      }
-    },
-    {
-      "id": 6,
-      "username": "omar_h",
-      "email": "omar@example.com",
-      "profile": {
-        "bio": "Game dev and Unity tutorials.",
-        "avatar": "https://i.pravatar.cc/150?img=6",
-        "fallbackAvatar": "https://ui-avatars.com/api/?name=omar+h",
-        "joinDate": "2024-01-15T10:30:00Z",
-        "isVerified": false,
-        "status": "active"
-      },
-      "social": {
-        "followers": [1, 2, 5],
-        "following": [7, 10],
-        "totalFollowers": 3,
-        "totalFollowing": 2
-      },
-      "performance": {
-        "ratings": [4, 5, 5],
-        "averageRating": 4.67,
-        "totalRatings": 3
-      },
-      "achievements": {
-        "badges": ["Game Maker"],
-        "points": 1300,
-        "level": "Intermediate"
-      },
-      "content": {
-        "schedule": [
-          {
-            "id": "sched-6",
-            "date": "2025-09-30T14:00:00Z",
-            "topic": "Unity Physics",
-            "duration": 60,
-            "maxAttendees": 100,
-            "currentAttendees": 20,
-            "status": "scheduled"
-          }
-        ],
-        "creations": [
-          {
-            "id": 6,
-            "title": "Unity for Beginners",
-            "type": "video",
-            "url": "/content/video-6",
-            "thumbnail": "/thumbnails/video-6.jpg",
-            "duration": 1200,
-            "readTime": null,
-            "views": 1600,
-            "likes": 110,
-            "createdAt": "2025-08-15T09:00:00Z",
-            "tags": ["sample", "video", "omar_h"],
-            "isPublished": true
-          }
-        ]
-      }
-    },
-    {
-      "id": 7,
-      "username": "sofia_r",
-      "email": "sofia@example.com",
-      "profile": {
-        "bio": "Educator sharing math tricks.",
-        "avatar": "https://i.pravatar.cc/150?img=7",
-        "fallbackAvatar": "https://ui-avatars.com/api/?name=sofia+r",
-        "joinDate": "2024-01-15T10:30:00Z",
-        "isVerified": true,
-        "status": "active"
-      },
-      "social": {
-        "followers": [3, 6],
-        "following": [8, 9],
-        "totalFollowers": 2,
-        "totalFollowing": 2
-      },
-      "performance": {
-        "ratings": [5, 4, 5],
-        "averageRating": 4.67,
-        "totalRatings": 3
-      },
-      "achievements": {
-        "badges": ["Math Wizard"],
-        "points": 1400,
-        "level": "Intermediate"
-      },
-      "content": {
-        "schedule": [
-          {
-            "id": "sched-7",
-            "date": "2025-10-01T14:00:00Z",
-            "topic": "Algebra Hacks",
-            "duration": 60,
-            "maxAttendees": 100,
-            "currentAttendees": 20,
-            "status": "scheduled"
-          }
-        ],
-        "creations": [
-          {
-            "id": 7,
-            "title": "Quick Algebra",
-            "type": "article",
-            "url": "/content/article-7",
-            "thumbnail": "/thumbnails/article-7.jpg",
-            "duration": null,
-            "readTime": 8,
-            "views": 1700,
-            "likes": 120,
-            "createdAt": "2025-08-15T09:00:00Z",
-            "tags": ["sample", "article", "sofia_r"],
-            "isPublished": true
-          }
-        ]
-      }
-    },
-    {
-      "id": 8,
-      "username": "diego_m",
-      "email": "diego@example.com",
-      "profile": {
-        "bio": "Travel blogger & photographer.",
-        "avatar": "https://i.pravatar.cc/150?img=8",
-        "fallbackAvatar": "https://ui-avatars.com/api/?name=diego+m",
-        "joinDate": "2024-01-15T10:30:00Z",
-        "isVerified": false,
-        "status": "active"
-      },
-      "social": {
-        "followers": [4, 7],
-        "following": [9, 10],
-        "totalFollowers": 2,
-        "totalFollowing": 2
-      },
-      "performance": {
-        "ratings": [5, 4, 4],
-        "averageRating": 4.33,
-        "totalRatings": 3
-      },
-      "achievements": {
-        "badges": ["Globetrotter"],
-        "points": 1600,
-        "level": "Intermediate"
-      },
-      "content": {
-        "schedule": [
-          {
-            "id": "sched-8",
-            "date": "2025-10-02T14:00:00Z",
-            "topic": "Travel Vlogging",
-            "duration": 60,
-            "maxAttendees": 100,
-            "currentAttendees": 20,
-            "status": "scheduled"
-          }
-        ],
-        "creations": [
-          {
-            "id": 8,
-            "title": "Best of Europe",
-            "type": "blog",
-            "url": "/content/blog-8",
-            "thumbnail": "/thumbnails/blog-8.jpg",
-            "duration": null,
-            "readTime": null,
-            "views": 1800,
-            "likes": 130,
-            "createdAt": "2025-08-15T09:00:00Z",
-            "tags": ["sample", "blog", "diego_m"],
-            "isPublished": true
-          }
-        ]
-      }
-    },
-    {
-      "id": 9,
-      "username": "amelia_w",
-      "email": "amelia@example.com",
-      "profile": {
-        "bio": "Music producer and singer.",
-        "avatar": "https://i.pravatar.cc/150?img=9",
-        "fallbackAvatar": "https://ui-avatars.com/api/?name=amelia+w",
-        "joinDate": "2024-01-15T10:30:00Z",
-        "isVerified": true,
-        "status": "active"
-      },
-      "social": {
-        "followers": [4, 7, 8],
-        "following": [10, 11],
-        "totalFollowers": 3,
-        "totalFollowing": 2
-      },
-      "performance": {
-        "ratings": [5, 5, 4],
-        "averageRating": 4.67,
-        "totalRatings": 3
-      },
-      "achievements": {
-        "badges": ["Hitmaker"],
-        "points": 1700,
-        "level": "Intermediate"
-      },
-      "content": {
-        "schedule": [
-          {
-            "id": "sched-9",
-            "date": "2025-10-03T14:00:00Z",
-            "topic": "Songwriting 101",
-            "duration": 60,
-            "maxAttendees": 100,
-            "currentAttendees": 20,
-            "status": "scheduled"
-          }
-        ],
-        "creations": [
-          {
-            "id": 9,
-            "title": "Lo-fi Beats",
-            "type": "audio",
-            "url": "/content/audio-9",
-            "thumbnail": "/thumbnails/audio-9.jpg",
-            "duration": null,
-            "readTime": null,
-            "views": 1900,
-            "likes": 140,
-            "createdAt": "2025-08-15T09:00:00Z",
-            "tags": ["sample", "audio", "amelia_w"],
-            "isPublished": true
-          }
-        ]
-      }
-    },
-    {
-      "id": 10,
-      "username": "raj_k",
-      "email": "raj@example.com",
-      "profile": {
-        "bio": "Data scientist diving into ML.",
-        "avatar": "https://i.pravatar.cc/150?img=10",
-        "fallbackAvatar": "https://ui-avatars.com/api/?name=raj+k",
-        "joinDate": "2024-01-15T10:30:00Z",
-        "isVerified": false,
-        "status": "active"
-      },
-      "social": {
-        "followers": [6, 8, 9],
-        "following": [11, 12],
-        "totalFollowers": 3,
-        "totalFollowing": 2
-      },
-      "performance": {
-        "ratings": [4, 5, 5],
-        "averageRating": 4.67,
-        "totalRatings": 3
-      },
-      "achievements": {
-        "badges": ["ML Enthusiast"],
-        "points": 1800,
-        "level": "Intermediate"
-      },
-      "content": {
-        "schedule": [
-          {
-            "id": "sched-10",
-            "date": "2025-10-04T14:00:00Z",
-            "topic": "Intro to ML",
-            "duration": 60,
-            "maxAttendees": 100,
-            "currentAttendees": 20,
-            "status": "scheduled"
-          }
-        ],
-        "creations": [
-          {
-            "id": 10,
-            "title": "ML Basics",
-            "type": "video",
-            "url": "/content/video-10",
-            "thumbnail": "/thumbnails/video-10.jpg",
-            "duration": 1200,
-            "readTime": null,
-            "views": 2000,
-            "likes": 150,
-            "createdAt": "2025-08-15T09:00:00Z",
-            "tags": ["sample", "video", "raj_k"],
-            "isPublished": true
-          }
-        ]
-      }
-    },
-    {
-      "id": 11,
-      "username": "emma_l",
-      "email": "emma@example.com",
-      "profile": {
-        "bio": "Creative writer and novelist.",
-        "avatar": "https://i.pravatar.cc/150?img=11",
-        "fallbackAvatar": "https://ui-avatars.com/api/?name=emma+l",
-        "joinDate": "2024-02-01T10:30:00Z",
-        "isVerified": true,
-        "status": "active"
-      },
-      "social": {
-        "followers": [9, 10],
-        "following": [12, 13],
-        "totalFollowers": 2,
-        "totalFollowing": 2
-      },
-      "performance": {
-        "ratings": [5, 5, 4],
-        "averageRating": 4.67,
-        "totalRatings": 3
-      },
-      "achievements": {
-        "badges": ["Storyteller"],
-        "points": 950,
-        "level": "Beginner"
-      },
-      "content": {
-        "schedule": [
-          {
-            "id": "sched-11",
-            "date": "2025-10-05T14:00:00Z",
-            "topic": "Creative Writing",
-            "duration": 75,
-            "maxAttendees": 150,
-            "currentAttendees": 89,
-            "status": "scheduled"
-          }
-        ],
-        "creations": [
-          {
-            "id": 11,
-            "title": "Character Development",
-            "type": "article",
-            "url": "/content/article-11",
-            "thumbnail": "/thumbnails/article-11.jpg",
-            "duration": null,
-            "readTime": 10,
-            "views": 2100,
-            "likes": 160,
-            "createdAt": "2025-08-20T09:00:00Z",
-            "tags": ["sample", "article", "emma_l"],
-            "isPublished": true
-          }
-        ]
+        "creator": []
       }
     },
     {
       "id": 12,
       "username": "sarah_c",
       "email": "sarah@example.com",
-      "profile": {
-        "bio": "Healthcare tech innovator.",
-        "avatar": "https://i.pravatar.cc/150?img=12",
-        "fallbackAvatar": "https://ui-avatars.com/api/?name=sarah+c",
-        "joinDate": "2024-02-01T10:30:00Z",
-        "isVerified": true,
-        "status": "active"
-      },
-      "social": {
-        "followers": [10, 11],
-        "following": [13, 14],
-        "totalFollowers": 2,
-        "totalFollowing": 2
-      },
-      "performance": {
-        "ratings": [5, 4, 5],
-        "averageRating": 4.67,
-        "totalRatings": 3
-      },
-      "achievements": {
-        "badges": ["Health Innovator"],
-        "points": 2000,
-        "level": "Advanced"
-      },
-      "content": {
-        "schedule": [
+      "sessions": {
+        "learner": [
           {
-            "id": "sched-12",
-            "date": "2025-10-06T14:00:00Z",
-            "topic": "AI in Healthcare",
+            "id": "3",
+            "title": "Creative Writing Workshop: Character Development",
+            "description": "Master the art of creating compelling characters that readers will love.",
+            "thumbnail": "https://images.unsplash.com/photo-1637743408313-c9d5e869d9db?q=80&w=1080&auto=format&fit=crop",
+            "date": "2025-10-05",
+            "duration": 75,
+            "status": "upcoming",
+            "attendees": 89,
+            "rating": 4.9,
+            "tags": ["Writing", "Creative", "Characters"]
+          }
+        ],
+        "creator": [
+          {
+            "id": "1",
+            "title": "AI in Healthcare: Future Trends and Applications",
+            "description": "Explore how AI is revolutionizing healthcare with real-world examples and future predictions.",
+            "thumbnail": "https://images.unsplash.com/photo-1585404544089-b386c0723dd4?q=80&w=1080&auto=format&fit=crop",
+            "date": "2025-10-06",
             "duration": 60,
-            "maxAttendees": 200,
-            "currentAttendees": 156,
-            "status": "scheduled"
-          }
-        ],
-        "creations": [
-          {
-            "id": 12,
-            "title": "AI in Medicine",
-            "type": "video",
-            "url": "/content/video-12",
-            "thumbnail": "/thumbnails/video-12.jpg",
-            "duration": 1800,
-            "readTime": null,
-            "views": 2200,
-            "likes": 170,
-            "createdAt": "2025-08-20T09:00:00Z",
-            "tags": ["sample", "video", "sarah_c"],
-            "isPublished": true
-          }
-        ]
-      }
-    },
-    {
-      "id": 13,
-      "username": "michael_t",
-      "email": "michael@example.com",
-      "profile": {
-        "bio": "Serial entrepreneur and investor.",
-        "avatar": "https://i.pravatar.cc/150?img=13",
-        "fallbackAvatar": "https://ui-avatars.com/api/?name=michael+t",
-        "joinDate": "2024-02-01T10:30:00Z",
-        "isVerified": true,
-        "status": "active"
-      },
-      "social": {
-        "followers": [11, 12],
-        "following": [14, 15],
-        "totalFollowers": 2,
-        "totalFollowing": 2
-      },
-      "performance": {
-        "ratings": [4, 5, 5],
-        "averageRating": 4.67,
-        "totalRatings": 3
-      },
-      "achievements": {
-        "badges": ["Entrepreneur"],
-        "points": 1900,
-        "level": "Advanced"
-      },
-      "content": {
-        "schedule": [
-          {
-            "id": "sched-13",
-            "date": "2025-10-07T14:00:00Z",
-            "topic": "Startup Fundraising",
-            "duration": 90,
-            "maxAttendees": 300,
-            "currentAttendees": 243,
-            "status": "scheduled"
-          }
-        ],
-        "creations": [
-          {
-            "id": 13,
-            "title": "Fundraising Strategies",
-            "type": "video",
-            "url": "/content/video-13",
-            "thumbnail": "/thumbnails/video-13.jpg",
-            "duration": 2700,
-            "readTime": null,
-            "views": 2300,
-            "likes": 180,
-            "createdAt": "2025-08-20T09:00:00Z",
-            "tags": ["sample", "video", "michael_t"],
-            "isPublished": true
-          }
-        ]
-      }
-    },
-    {
-      "id": 14,
-      "username": "alex_k",
-      "email": "alexk@example.com",
-      "profile": {
-        "bio": "Crypto analyst and trader.",
-        "avatar": "https://i.pravatar.cc/150?img=14",
-        "fallbackAvatar": "https://ui-avatars.com/api/?name=alex+k",
-        "joinDate": "2024-02-01T10:30:00Z",
-        "isVerified": true,
-        "status": "active"
-      },
-      "social": {
-        "followers": [12, 13],
-        "following": [15, 16],
-        "totalFollowers": 2,
-        "totalFollowing": 2
-      },
-      "performance": {
-        "ratings": [4, 4, 5],
-        "averageRating": 4.33,
-        "totalRatings": 3
-      },
-      "achievements": {
-        "badges": ["Crypto Guru"],
-        "points": 1700,
-        "level": "Intermediate"
-      },
-      "content": {
-        "schedule": [
-          {
-            "id": "sched-14",
-            "date": "2025-09-24T14:00:00Z",
-            "topic": "Crypto Strategies",
-            "duration": 45,
-            "maxAttendees": 1500,
-            "currentAttendees": 1200,
-            "status": "live"
-          }
-        ],
-        "creations": [
-          {
-            "id": 14,
-            "title": "Crypto Investing",
-            "type": "video",
-            "url": "/content/video-14",
-            "thumbnail": "/thumbnails/video-14.jpg",
-            "duration": 1350,
-            "readTime": null,
-            "views": 2400,
-            "likes": 190,
-            "createdAt": "2025-08-20T09:00:00Z",
-            "tags": ["sample", "video", "alex_k"],
-            "isPublished": true
-          }
-        ]
-      }
-    },
-    {
-      "id": 15,
-      "username": "jessica_p",
-      "email": "jessica@example.com",
-      "profile": {
-        "bio": "Digital marketing expert.",
-        "avatar": "https://i.pravatar.cc/150?img=15",
-        "fallbackAvatar": "https://ui-avatars.com/api/?name=jessica+p",
-        "joinDate": "2024-02-01T10:30:00Z",
-        "isVerified": true,
-        "status": "active"
-      },
-      "social": {
-        "followers": [13, 14],
-        "following": [16, 17],
-        "totalFollowers": 2,
-        "totalFollowing": 2
-      },
-      "performance": {
-        "ratings": [5, 4, 5],
-        "averageRating": 4.67,
-        "totalRatings": 3
-      },
-      "achievements": {
-        "badges": ["Marketing Pro"],
-        "points": 1600,
-        "level": "Intermediate"
-      },
-      "content": {
-        "schedule": [
-          {
-            "id": "sched-15",
-            "date": "2025-10-08T14:00:00Z",
-            "topic": "Digital Marketing Trends",
-            "duration": 60,
-            "maxAttendees": 1000,
-            "currentAttendees": 890,
-            "status": "scheduled"
-          }
-        ],
-        "creations": [
-          {
-            "id": 15,
-            "title": "SEO Strategies",
-            "type": "video",
-            "url": "/content/video-15",
-            "thumbnail": "/thumbnails/video-15.jpg",
-            "duration": 1800,
-            "readTime": null,
-            "views": 2500,
-            "likes": 200,
-            "createdAt": "2025-08-20T09:00:00Z",
-            "tags": ["sample", "video", "jessica_p"],
-            "isPublished": true
+            "status": "upcoming",
+            "attendees": 156,
+            "rating": 4.9,
+            "tags": ["AI", "Healthcare", "Technology"]
           }
         ]
       }
@@ -880,288 +114,33 @@
       "id": 16,
       "username": "david_s",
       "email": "david@example.com",
-      "profile": {
-        "bio": "React developer and tutor.",
-        "avatar": "https://i.pravatar.cc/150?img=16",
-        "fallbackAvatar": "https://ui-avatars.com/api/?name=david+s",
-        "joinDate": "2024-02-01T10:30:00Z",
-        "isVerified": true,
-        "status": "active"
-      },
-      "social": {
-        "followers": [14, 15],
-        "following": [17, 18],
-        "totalFollowers": 2,
-        "totalFollowing": 2
-      },
-      "performance": {
-        "ratings": [5, 5, 5],
-        "averageRating": 5.0,
-        "totalRatings": 3
-      },
-      "achievements": {
-        "badges": ["React Master"],
-        "points": 2100,
-        "level": "Advanced"
-      },
-      "content": {
-        "schedule": [
+      "sessions": {
+        "learner": [
           {
-            "id": "sched-16",
-            "date": "2025-10-09T14:00:00Z",
-            "topic": "React Performance",
+            "id": "5",
+            "title": "Digital Marketing in 2025: Latest Trends",
+            "description": "Stay ahead with the latest digital marketing strategies and tools.",
+            "thumbnail": "https://images.unsplash.com/photo-1583932692875-a42450d50acf?q=80&w=1080&auto=format&fit=crop",
+            "date": "2025-10-08",
+            "duration": 60,
+            "status": "upcoming",
+            "attendees": 890,
+            "rating": 4.8,
+            "tags": ["Marketing", "Digital", "Trends"]
+          }
+        ],
+        "creator": [
+          {
+            "id": "6",
+            "title": "React Performance Optimization",
+            "description": "Deep dive into React performance optimization techniques and best practices.",
+            "thumbnail": "https://images.unsplash.com/photo-1587279825909-6725a8a82e4e?q=80&w=1080&auto=format&fit=crop",
+            "date": "2025-10-09",
             "duration": 120,
-            "maxAttendees": 800,
-            "currentAttendees": 650,
-            "status": "scheduled"
-          }
-        ],
-        "creations": [
-          {
-            "id": 16,
-            "title": "React Optimization",
-            "type": "video",
-            "url": "/content/video-16",
-            "thumbnail": "/thumbnails/video-16.jpg",
-            "duration": 3600,
-            "readTime": null,
-            "views": 2600,
-            "likes": 210,
-            "createdAt": "2025-08-20T09:00:00Z",
-            "tags": ["sample", "video", "david_s"],
-            "isPublished": true
-          }
-        ]
-      }
-    },
-    {
-      "id": 17,
-      "username": "lisa_b",
-      "email": "lisa@example.com",
-      "profile": {
-        "bio": "Fitness coach and motivator.",
-        "avatar": "https://i.pravatar.cc/150?img=17",
-        "fallbackAvatar": "https://ui-avatars.com/api/?name=lisa+b",
-        "joinDate": "2024-02-01T10:30:00Z",
-        "isVerified": false,
-        "status": "active"
-      },
-      "social": {
-        "followers": [15, 16],
-        "following": [18, 19],
-        "totalFollowers": 2,
-        "totalFollowing": 2
-      },
-      "performance": {
-        "ratings": [4, 5, 4],
-        "averageRating": 4.33,
-        "totalRatings": 3
-      },
-      "achievements": {
-        "badges": ["Fitness Guru"],
-        "points": 1200,
-        "level": "Intermediate"
-      },
-      "content": {
-        "schedule": [
-          {
-            "id": "sched-17",
-            "date": "2025-10-10T14:00:00Z",
-            "topic": "Fitness Basics",
-            "duration": 60,
-            "maxAttendees": 100,
-            "currentAttendees": 50,
-            "status": "scheduled"
-          }
-        ],
-        "creations": [
-          {
-            "id": 17,
-            "title": "Workout Plans",
-            "type": "video",
-            "url": "/content/video-17",
-            "thumbnail": "/thumbnails/video-17.jpg",
-            "duration": 1800,
-            "readTime": null,
-            "views": 2700,
-            "likes": 220,
-            "createdAt": "2025-08-20T09:00:00Z",
-            "tags": ["sample", "video", "lisa_b"],
-            "isPublished": true
-          }
-        ]
-      }
-    },
-    {
-      "id": 18,
-      "username": "jake_m",
-      "email": "jake@example.com",
-      "profile": {
-        "bio": "Cybersecurity expert.",
-        "avatar": "https://i.pravatar.cc/150?img=18",
-        "fallbackAvatar": "https://ui-avatars.com/api/?name=jake+m",
-        "joinDate": "2024-02-01T10:30:00Z",
-        "isVerified": true,
-        "status": "active"
-      },
-      "social": {
-        "followers": [16, 17],
-        "following": [19, 20],
-        "totalFollowers": 2,
-        "totalFollowing": 2
-      },
-      "performance": {
-        "ratings": [5, 4, 5],
-        "averageRating": 4.67,
-        "totalRatings": 3
-      },
-      "achievements": {
-        "badges": ["Cyber Guardian"],
-        "points": 1300,
-        "level": "Intermediate"
-      },
-      "content": {
-        "schedule": [
-          {
-            "id": "sched-18",
-            "date": "2025-10-11T14:00:00Z",
-            "topic": "Cybersecurity 101",
-            "duration": 60,
-            "maxAttendees": 100,
-            "currentAttendees": 60,
-            "status": "scheduled"
-          }
-        ],
-        "creations": [
-          {
-            "id": 18,
-            "title": "Ethical Hacking",
-            "type": "video",
-            "url": "/content/video-18",
-            "thumbnail": "/thumbnails/video-18.jpg",
-            "duration": 1800,
-            "readTime": null,
-            "views": 2800,
-            "likes": 230,
-            "createdAt": "2025-08-20T09:00:00Z",
-            "tags": ["sample", "video", "jake_m"],
-            "isPublished": true
-          }
-        ]
-      }
-    },
-    {
-      "id": 19,
-      "username": "olivia_n",
-      "email": "olivia@example.com",
-      "profile": {
-        "bio": "Photography enthusiast.",
-        "avatar": "https://i.pravatar.cc/150?img=19",
-        "fallbackAvatar": "https://ui-avatars.com/api/?name=olivia+n",
-        "joinDate": "2024-02-01T10:30:00Z",
-        "isVerified": false,
-        "status": "active"
-      },
-      "social": {
-        "followers": [17, 18],
-        "following": [20, 1],
-        "totalFollowers": 2,
-        "totalFollowing": 2
-      },
-      "performance": {
-        "ratings": [4, 5, 4],
-        "averageRating": 4.33,
-        "totalRatings": 3
-      },
-      "achievements": {
-        "badges": ["Shutterbug"],
-        "points": 1400,
-        "level": "Intermediate"
-      },
-      "content": {
-        "schedule": [
-          {
-            "id": "sched-19",
-            "date": "2025-10-12T14:00:00Z",
-            "topic": "Photography Basics",
-            "duration": 60,
-            "maxAttendees": 100,
-            "currentAttendees": 70,
-            "status": "scheduled"
-          }
-        ],
-        "creations": [
-          {
-            "id": 19,
-            "title": "Portrait Photography",
-            "type": "article",
-            "url": "/content/article-19",
-            "thumbnail": "/thumbnails/article-19.jpg",
-            "duration": null,
-            "readTime": 10,
-            "views": 2900,
-            "likes": 240,
-            "createdAt": "2025-08-20T09:00:00Z",
-            "tags": ["sample", "article", "olivia_n"],
-            "isPublished": true
-          }
-        ]
-      }
-    },
-    {
-      "id": 20,
-      "username": "ethan_w",
-      "email": "ethan@example.com",
-      "profile": {
-        "bio": "Blockchain developer.",
-        "avatar": "https://i.pravatar.cc/150?img=20",
-        "fallbackAvatar": "https://ui-avatars.com/api/?name=ethan+w",
-        "joinDate": "2024-02-01T10:30:00Z",
-        "isVerified": true,
-        "status": "active"
-      },
-      "social": {
-        "followers": [18, 19],
-        "following": [1, 2],
-        "totalFollowers": 2,
-        "totalFollowing": 2
-      },
-      "performance": {
-        "ratings": [5, 5, 5],
-        "averageRating": 5.0,
-        "totalRatings": 3
-      },
-      "achievements": {
-        "badges": ["Blockchain Pioneer"],
-        "points": 2200,
-        "level": "Advanced"
-      },
-      "content": {
-        "schedule": [
-          {
-            "id": "sched-20",
-            "date": "2025-10-13T14:00:00Z",
-            "topic": "Blockchain Basics",
-            "duration": 60,
-            "maxAttendees": 100,
-            "currentAttendees": 80,
-            "status": "scheduled"
-          }
-        ],
-        "creations": [
-          {
-            "id": 20,
-            "title": "Smart Contracts",
-            "type": "video",
-            "url": "/content/video-20",
-            "thumbnail": "/thumbnails/video-20.jpg",
-            "duration": 1800,
-            "readTime": null,
-            "views": 3000,
-            "likes": 250,
-            "createdAt": "2025-08-20T09:00:00Z",
-            "tags": ["sample", "video", "ethan_w"],
-            "isPublished": true
+            "status": "upcoming",
+            "attendees": 650,
+            "rating": 4.9,
+            "tags": ["React", "Performance", "JavaScript"]
           }
         ]
       }
@@ -1169,13 +148,13 @@
   ],
   "sessions": [
     {
-      "id": 1,
+      "id": "1",
       "title": "AI in Healthcare: Future Trends and Applications",
       "creator": "sarah_c",
       "avatar": "https://i.pravatar.cc/150?img=12",
       "date": "2025-10-06",
       "time": "2:00 PM EST",
-      "duration": "60 min",
+      "duration": 60,
       "participants": 156,
       "maxParticipants": 200,
       "category": "Technology",
@@ -1188,13 +167,13 @@
       "live": false
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Startup Fundraising Masterclass",
       "creator": "michael_t",
       "avatar": "https://i.pravatar.cc/150?img=13",
       "date": "2025-10-07",
       "time": "4:00 PM EST",
-      "duration": "90 min",
+      "duration": 90,
       "participants": 243,
       "maxParticipants": 300,
       "category": "Business",
@@ -1207,13 +186,13 @@
       "live": false
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Creative Writing Workshop: Character Development",
       "creator": "emma_l",
       "avatar": "https://i.pravatar.cc/150?img=11",
       "date": "2025-10-05",
       "time": "6:00 PM EST",
-      "duration": "75 min",
+      "duration": 75,
       "participants": 89,
       "maxParticipants": 150,
       "category": "Creative",
@@ -1226,13 +205,13 @@
       "live": false
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "Cryptocurrency Investment Strategies - LIVE",
       "creator": "alex_k",
       "avatar": "https://i.pravatar.cc/150?img=14",
       "date": "2025-09-24",
       "time": "Now Live",
-      "duration": "45 min",
+      "duration": 45,
       "participants": 1200,
       "maxParticipants": 1500,
       "category": "Finance",
@@ -1245,13 +224,13 @@
       "live": true
     },
     {
-      "id": 5,
+      "id": "5",
       "title": "Digital Marketing in 2025: Latest Trends",
       "creator": "jessica_p",
       "avatar": "https://i.pravatar.cc/150?img=15",
       "date": "2025-10-08",
       "time": "3:00 PM EST",
-      "duration": "60 min",
+      "duration": 60,
       "participants": 890,
       "maxParticipants": 1000,
       "category": "Marketing",
@@ -1264,13 +243,13 @@
       "live": false
     },
     {
-      "id": 6,
+      "id": "6",
       "title": "React Performance Optimization",
       "creator": "david_s",
       "avatar": "https://i.pravatar.cc/150?img=16",
       "date": "2025-10-09",
       "time": "1:00 PM EST",
-      "duration": "120 min",
+      "duration": 120,
       "participants": 650,
       "maxParticipants": 800,
       "category": "Technology",
@@ -1299,66 +278,6 @@
           "earnedBy": 100,
           "requirements": {
             "sessionsAttended": 1
-          }
-        },
-        {
-          "id": "top-learner",
-          "name": "Top Learner",
-          "description": "Reach the top 10 learners leaderboard",
-          "icon": "trophy",
-          "rarity": "Rare",
-          "points": 200,
-          "earnedBy": 10,
-          "requirements": {
-            "leaderboardRank": 10
-          }
-        },
-        {
-          "id": "content-creator",
-          "name": "Content Creator",
-          "description": "Publish your first piece of content",
-          "icon": "award",
-          "rarity": "Common",
-          "points": 100,
-          "earnedBy": 50,
-          "requirements": {
-            "creationsPublished": 1
-          }
-        },
-        {
-          "id": "master-creator",
-          "name": "Master Creator",
-          "description": "Reach the top 10 creators leaderboard",
-          "icon": "trophy",
-          "rarity": "Epic",
-          "points": 500,
-          "earnedBy": 5,
-          "requirements": {
-            "leaderboardRank": 10
-          }
-        },
-        {
-          "id": "community-star",
-          "name": "Community Star",
-          "description": "Gain 100 followers",
-          "icon": "award",
-          "rarity": "Rare",
-          "points": 150,
-          "earnedBy": 20,
-          "requirements": {
-            "totalFollowers": 100
-          }
-        },
-        {
-          "id": "legendary-learner",
-          "name": "Legendary Learner",
-          "description": "Earn 5000 points",
-          "icon": "trophy",
-          "rarity": "Legendary",
-          "points": 1000,
-          "earnedBy": 2,
-          "requirements": {
-            "points": 5000
           }
         }
       ]
@@ -1414,46 +333,6 @@
           "isQuestion": true,
           "likes": 12,
           "isModerator": false
-        },
-        {
-          "id": 2,
-          "user": "Maria Garcia",
-          "avatar": "https://i.pravatar.cc/150?img=2",
-          "message": "Thanks for the session! Very helpful insights on code splitting.",
-          "timestamp": "14:07",
-          "isQuestion": false,
-          "likes": 8,
-          "isModerator": false
-        },
-        {
-          "id": 3,
-          "user": "David Smith",
-          "avatar": "https://i.pravatar.cc/150?img=16",
-          "message": "Happy to help! Let me share a quick example of React.memo in action.",
-          "timestamp": "14:08",
-          "isQuestion": false,
-          "likes": 15,
-          "isModerator": true
-        },
-        {
-          "id": 4,
-          "user": "Sarah Johnson",
-          "avatar": "https://i.pravatar.cc/150?img=5",
-          "message": "What's your recommendation for handling large lists in React?",
-          "timestamp": "14:10",
-          "isQuestion": true,
-          "likes": 6,
-          "isModerator": false
-        },
-        {
-          "id": 5,
-          "user": "Mike Wilson",
-          "avatar": "https://i.pravatar.cc/150?img=8",
-          "message": "This is exactly what I needed for my current project! Thanks!",
-          "timestamp": "14:12",
-          "isQuestion": false,
-          "likes": 4,
-          "isModerator": false
         }
       ],
       "stats": {
@@ -1469,38 +348,6 @@
           "question": "How do you handle performance optimization in React applications with many concurrent API calls?",
           "timestamp": "14:03",
           "votes": 23
-        },
-        {
-          "id": 2,
-          "user": "John Lee",
-          "avatar": "https://i.pravatar.cc/150?img=4",
-          "question": "What's the best approach for optimizing bundle size in production builds?",
-          "timestamp": "14:06",
-          "votes": 18
-        },
-        {
-          "id": 3,
-          "user": "Lisa Wang",
-          "avatar": "https://i.pravatar.cc/150?img=7",
-          "question": "Can you explain the difference between useMemo and useCallback with examples?",
-          "timestamp": "14:09",
-          "votes": 15
-        },
-        {
-          "id": 4,
-          "user": "Tom Anderson",
-          "avatar": "https://i.pravatar.cc/150?img=10",
-          "question": "How do you debug performance issues in React DevTools?",
-          "timestamp": "14:11",
-          "votes": 12
-        },
-        {
-          "id": 5,
-          "user": "Rachel Green",
-          "avatar": "https://i.pravatar.cc/150?img=13",
-          "question": "What's your recommended approach for handling heavy computations in React components?",
-          "timestamp": "14:13",
-          "votes": 9
         }
       ],
       "stats": {
