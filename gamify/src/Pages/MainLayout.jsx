@@ -53,7 +53,7 @@ const MainLayout = () => {
                   onClick={toggleNotifications}
                   aria-label="Notifications"
                 >
-                  <Bell size={30} className="text-gray-600" />
+                  <Bell size={20} className="text-gray-600" />
                   {isNotificationsOpen && (
                     <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg p-4 z-50">
                       <h3 className="text-sm font-semibold text-gray-800 mb-2">Notifications</h3>
@@ -76,7 +76,7 @@ const MainLayout = () => {
                   onClick={toggleSettings}
                   aria-label="Settings"
                 >
-                  <Settings size={30} className="text-gray-600" />
+                  <Settings size={20} className="text-gray-600" />
                   {isSettingsOpen && (
                     <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg p-2 z-50">
                       <h3 className="text-sm font-semibold text-gray-800 mb-2">Settings</h3>
