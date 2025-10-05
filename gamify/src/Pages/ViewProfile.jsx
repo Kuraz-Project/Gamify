@@ -43,18 +43,11 @@ const ViewProfile = () => {
   })) : []
 
   useEffect(() => {
-    const loadProfile = () => {
+    const loadProfile = async () => {
       try {
-        console.log('Loading profile for id:', id) // Debug log
-        if (!id) throw new Error('No user ID provided')
-
-        // Find user from db.json
-        const parsedId = parseInt(id, 10)
-        const foundUser = db.users.find(u => u.id === parsedId)
-        if (!foundUser) throw new Error('User not found in db.json')
-
-        console.log('Loaded user data:', foundUser) // Debug log
-        setUser(foundUser)
+        const response = await fetch (`http://localhost:3000/users/${id}`)
+        const data = await response.json()
+        setUser(data)
       } catch (error) {
         console.error('Error loading profile:', error)
         setError(error.message)
